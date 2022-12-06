@@ -1,12 +1,12 @@
 //
 //  SolarToLunarTests.swift
-//  LunarSunConverterTests
+//  KoreanLunarConverterTests
 //
 //  Created by SwiftMan on 2022/12/07.
 //
 
 import XCTest
-@testable import LunarSunConverter
+@testable import KoreanLunarConverter
 
 final class SolarToLunarTests: XCTestCase {
   func testSolarToLunar_2022_12_16() {
