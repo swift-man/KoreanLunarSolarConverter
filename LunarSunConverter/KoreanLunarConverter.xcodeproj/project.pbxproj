@@ -26,6 +26,10 @@
 		E563137F293FEC99004414BC /* KoreanSolarAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E563137E293FEC99004414BC /* KoreanSolarAlgorithm.swift */; };
 		E5631380293FEE8A004414BC /* KoreanSolarToLunarConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E563137C293FEBA7004414BC /* KoreanSolarToLunarConverter.swift */; };
 		E5631381293FEE95004414BC /* KoreanSolarAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E563137E293FEC99004414BC /* KoreanSolarAlgorithm.swift */; };
+		E5631383293FF073004414BC /* SolarDateRangeChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5631382293FF073004414BC /* SolarDateRangeChecker.swift */; };
+		E5631384293FF075004414BC /* SolarDateRangeChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5631382293FF073004414BC /* SolarDateRangeChecker.swift */; };
+		E5631386293FF086004414BC /* LunarDateRangeChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5631385293FF086004414BC /* LunarDateRangeChecker.swift */; };
+		E5631387293FF088004414BC /* LunarDateRangeChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5631385293FF086004414BC /* LunarDateRangeChecker.swift */; };
 		E56A4585293F9EE2001CE6C1 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56A4584293F9EE2001CE6C1 /* Date+.swift */; };
 		E56A4586293F9EF2001CE6C1 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56A4584293F9EE2001CE6C1 /* Date+.swift */; };
 		E56A4588293F9F5E001CE6C1 /* LunarToSolarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56A4587293F9F5E001CE6C1 /* LunarToSolarTests.swift */; };
@@ -55,6 +59,8 @@
 		E5631379293FEB97004414BC /* KoreanLunarToSolarConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanLunarToSolarConverter.swift; sourceTree = "<group>"; };
 		E563137C293FEBA7004414BC /* KoreanSolarToLunarConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanSolarToLunarConverter.swift; sourceTree = "<group>"; };
 		E563137E293FEC99004414BC /* KoreanSolarAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanSolarAlgorithm.swift; sourceTree = "<group>"; };
+		E5631382293FF073004414BC /* SolarDateRangeChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarDateRangeChecker.swift; sourceTree = "<group>"; };
+		E5631385293FF086004414BC /* LunarDateRangeChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunarDateRangeChecker.swift; sourceTree = "<group>"; };
 		E56A4584293F9EE2001CE6C1 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		E56A4587293F9F5E001CE6C1 /* LunarToSolarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunarToSolarTests.swift; sourceTree = "<group>"; };
 		E56A4589293F9F6B001CE6C1 /* SolarToLunarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarToLunarTests.swift; sourceTree = "<group>"; };
@@ -102,6 +108,8 @@
 			children = (
 				E50ED247293CC14400679B9D /* KoreanLunarConverter.h */,
 				E5631376293FE7EA004414BC /* KoreanDate.swift */,
+				E5631382293FF073004414BC /* SolarDateRangeChecker.swift */,
+				E5631385293FF086004414BC /* LunarDateRangeChecker.swift */,
 				E5631379293FEB97004414BC /* KoreanLunarToSolarConverter.swift */,
 				E563137C293FEBA7004414BC /* KoreanSolarToLunarConverter.swift */,
 				E563136A293FD02A004414BC /* KoreanLunarDataSource.swift */,
@@ -246,8 +254,10 @@
 				E563137A293FEB97004414BC /* KoreanLunarToSolarConverter.swift in Sources */,
 				E50ED249293CC14400679B9D /* KoreanLunarConverter.docc in Sources */,
 				E56A4585293F9EE2001CE6C1 /* Date+.swift in Sources */,
+				E5631386293FF086004414BC /* LunarDateRangeChecker.swift in Sources */,
 				E563136B293FD02A004414BC /* KoreanLunarDataSource.swift in Sources */,
 				E5631372293FD40D004414BC /* KoreanLunarAlgorithm.swift in Sources */,
+				E5631383293FF073004414BC /* SolarDateRangeChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +272,8 @@
 				E563137B293FEB9B004414BC /* KoreanLunarToSolarConverter.swift in Sources */,
 				E5631381293FEE95004414BC /* KoreanSolarAlgorithm.swift in Sources */,
 				E5631380293FEE8A004414BC /* KoreanSolarToLunarConverter.swift in Sources */,
+				E5631387293FF088004414BC /* LunarDateRangeChecker.swift in Sources */,
+				E5631384293FF075004414BC /* SolarDateRangeChecker.swift in Sources */,
 				E5631378293FEB31004414BC /* KoreanDate.swift in Sources */,
 				E5631373293FDEBB004414BC /* KoreanLunarAlgorithm.swift in Sources */,
 				E56A4588293F9F5E001CE6C1 /* LunarToSolarTests.swift in Sources */,
