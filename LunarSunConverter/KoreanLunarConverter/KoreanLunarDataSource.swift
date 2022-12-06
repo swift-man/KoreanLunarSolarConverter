@@ -9,12 +9,6 @@ import Foundation
 
 final class KoreanLunarDataSource {
   let lunarBaseYear = 1000
-  let solarLunarDayDiff = 43
-
-  let lunarSmallMonthDay = 29
-  let lunarBigMonthDay = 30
-  let solarSmallYearDay = 365
-  let solarBigYearDay = 366
 
   let koreanLunarData = [
     0x82c60a57, 0x82fec52b, 0x82c40d2a, 0x82c60d55, 0xc30095ad, 0x82c4056a, 0x82c6096d, 0x830054dd, 0xc2c404ad, 0x82c40a4d,

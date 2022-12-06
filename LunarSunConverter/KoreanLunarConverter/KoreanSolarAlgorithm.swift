@@ -13,8 +13,10 @@ final class KoreanSolarAlgorithm {
   func solarAbsDays(year: Int,
                     month: Int,
                     day: Int) -> Int {
+    let solarLunarDayDiff = 43
+    
     var days = solarDaysBeforeBaseYear(year: year-1) + solarDaysBeforeBaseMonth(year: year, month: month-1) + day
-    days -= dataSource.solarLunarDayDiff
+    days -= solarLunarDayDiff
     return days
   }
   
@@ -24,8 +26,11 @@ final class KoreanSolarAlgorithm {
       let solarDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, 29]
       return month == 2 && isSolarIntercalationYear(lunar: lunar) ? solarDays[12] : solarDays[month - 1]
     }
+    
+    let solarSmallYearDay = 365
+    let solarBigYearDay = 366
 
-    return isSolarIntercalationYear(lunar: lunar) ? dataSource.solarBigYearDay : dataSource.solarSmallYearDay
+    return isSolarIntercalationYear(lunar: lunar) ? solarBigYearDay : solarSmallYearDay
   }
 }
 
