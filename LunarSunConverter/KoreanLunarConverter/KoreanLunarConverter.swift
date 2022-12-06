@@ -1,6 +1,6 @@
 //
 //  KoreanLunarConverter.swift
-//  LunarSunConverter
+//  KoreanLunarConverter
 //
 //  Created by SwiftMan on 2022/12/06.
 //
