@@ -16,8 +16,6 @@ final class KoreanLunarDataSource {
   let solarSmallYearDay = 365
   let solarBigYearDay = 366
 
-  let solarDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, 29]
-
   let koreanLunarData = [
     0x82c60a57, 0x82fec52b, 0x82c40d2a, 0x82c60d55, 0xc30095ad, 0x82c4056a, 0x82c6096d, 0x830054dd, 0xc2c404ad, 0x82c40a4d,
     0x83002e4d, 0x82c40b26, 0xc300ab56, 0x82c60ad5, 0x82c4035a, 0x8300697a, 0xc2c6095b, 0x82c4049b, 0x83004a9b, 0x82c40a4b,

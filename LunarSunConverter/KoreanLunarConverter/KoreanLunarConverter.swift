@@ -7,6 +7,16 @@
 
 import Foundation
 
+public struct KoreanDate {
+  public var date: Date
+  public var isIntercalation: Bool
+  
+  public init(date: Date, isIntercalation: Bool) {
+    self.date = date
+    self.isIntercalation = isIntercalation
+  }
+}
+
 public final class KoreanLunarConverter {
   enum CalendarType {
     case lunar
@@ -29,99 +39,10 @@ public final class KoreanLunarConverter {
   }
   
   private let dataSource = KoreanLunarDataSource()
-
-  private let solarDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, 29]
-  private let koreanCheongan = ["갑", "을", "병", "정", "무", "기", "경", "신", "임", "계"]
-  private let koreanGanji = ["자", "축", "인", "묘", "진", "사", "오", "미", "신", "유", "술", "해"]
-  private let koreanGapjaUnit = ["년", "월", "일"]
-
-  private let chineseCheongan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"]
-  private let chineseGanji = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"]
-
-  private var lunarYear = 0
-  private var lunarMonth = 0
-  private var lunarDay = 0
-  private var isIntercalation = false
-
-  private var solarYear = 0
-  private var solarMonth = 0
-  private var solarDay = 0
-
-  private var gapjaYearInx = [0, 0, 0]
-  private var gapjaMonthInx = [0, 0, 1]
-  private var gapjaDayInx = [0, 0, 2]
-
-  public var lunarDate: Date {
-    var result = Date()
-    result.year = lunarYear
-    result.month = lunarMonth
-    result.day = lunarDay
-    return result
-  }
-
-  public var solarDate: Date {
-    var result = Date()
-    result.year = solarYear
-    result.month = solarMonth
-    result.day = solarDay
-    return result
-  }
-
-   
-
-  private func lunarDays(year: Int,
-                         month: Int? = nil,
-                         isIntercalation: Bool? = nil) -> Int {
-    let lunar = dataSource.lunar(year: year)
-
-    guard
-      let month,
-      let isIntercalation
-    else { return (lunar >> 17) & 0x01FF }
-
-    if isIntercalation && dataSource.lunarIntercalationMonth(lunar: lunar) == month {
-      return ((lunar >> 16) & 0x01) > 0 ? dataSource.lunarBigMonthDay : dataSource.lunarSmallMonthDay
-    }
-    return ((lunar >> (12 - month)) & 0x01) > 0 ? dataSource.lunarBigMonthDay : dataSource.lunarSmallMonthDay
-  }
-
-  private func lunarDaysBeforeBaseYear(year: Int) -> Int {
-    var days = 0
-    for baseYear in dataSource.lunarBaseYear ... year {
-      days += lunarDays(year: baseYear)
-    }
-    return days
-  }
-
-  private func lunarDaysBeforeBaseMonth(year: Int, month: Int, isIntercalation: Bool) -> Int {
-    var days = 0
-    if year >= dataSource.lunarBaseYear && month > 0 {
-      for baseMonth in 1 ... month {
-        days += lunarDays(year: year, month: baseMonth, isIntercalation: false)
-      }
-    }
-
-    var intercalationMonth = 0
-    if isIntercalation {
-      intercalationMonth = dataSource.lunarIntercalationMonth(lunar: dataSource.lunar(year: year))
-    }
-    if intercalationMonth > 0 && intercalationMonth < month + 1 {
-      days += lunarDays(year: year, month: intercalationMonth, isIntercalation: true)
-    }
-    return days
-  }
-
-  private func lunarAbsDays(year: Int,
-                            month: Int,
-                            day: Int,
-                            isIntercalation: Bool) -> Int {
-    var days = lunarDaysBeforeBaseYear(year: year - 1) + lunarDaysBeforeBaseMonth(year: year,
-                                                                                  month: month - 1,
-                                                                                  isIntercalation: true) + day
-    if isIntercalation && dataSource.lunarIntercalationMonth(lunar: dataSource.lunar(year: year)) == month {
-      days += lunarDays(year: year, month: month, isIntercalation: false)
-    }
-    return days
+  private let algorithm = KoreanLunarAlgorithm()
+  
+  public init() {
+    
   }
 
   private func isSolarIntercalationYear(lunar: Int) -> Bool {
@@ -131,6 +52,7 @@ public final class KoreanLunarConverter {
   private func solarDays(year: Int, month: Int? = nil) -> Int {
     let lunar = dataSource.lunar(year: year)
     if let month {
+      let solarDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, 29]
       return month == 2 && isSolarIntercalationYear(lunar: lunar) ? solarDays[12] : solarDays[month - 1]
     }
 
@@ -161,11 +83,12 @@ public final class KoreanLunarConverter {
     return days
   }
 
-  private func solarDateByLunarDate(lunarYear: Int,
-                                    lunarMonth: Int,
-                                    lunarDay: Int,
-                                    isIntercalation: Bool) {
-    let absDays = lunarAbsDays(year: lunarYear, month: lunarMonth, day: lunarDay, isIntercalation: isIntercalation)
+  private func solarDate(fromLunarDate date: Date, isIntercalation: Bool) -> Date {
+    let lunarYear = date.year
+    let absDays = algorithm.lunarAbsDays(year: lunarYear,
+                                         month: date.month,
+                                         day: date.day,
+                                         isIntercalation: isIntercalation)
     var solarYear = 0
     var solarMonth = 0
     var solarDay = 0
@@ -181,56 +104,66 @@ public final class KoreanLunarConverter {
       }
     }
 
-    self.solarYear = solarYear
-    self.solarMonth = solarMonth
-    self.solarDay = solarDay
+    var solarDate = Date()
+    solarDate.year = solarYear
+    solarDate.month = solarMonth
+    solarDate.day = solarDay
+    
+    return solarDate
   }
 
-  private func lunarDateBySolarDate(solarYear: Int,
-                                    solarMonth: Int,
-                                    solarDay: Int) {
+  private func lunarDate(fromSolarDate date: Date) -> KoreanDate {
+    let solarYear = date.year
+    let solarMonth = date.month
+    let solarDay = date.day
+    
+    
     let absDays = solarAbsDays(year: solarYear, month: solarMonth, day: solarDay)
-    let lunarYear = absDays >= lunarAbsDays(year: solarYear,
-                                            month: 1,
-                                            day: 1,
-                                            isIntercalation: false) ? solarYear : solarYear - 1
+    let lunarYear = absDays >= algorithm.lunarAbsDays(year: solarYear,
+                                                      month: 1,
+                                                      day: 1,
+                                                      isIntercalation: false) ? solarYear : solarYear - 1
     var lunarMonth = 0
     var lunarDay = 0
     var isIntercalation = false
-
+    
     for month in stride(from: 12, through: 1, by: -1) {
-      let absDaysByMonth = lunarAbsDays(year: lunarYear,
-                                        month: month,
-                                        day: 1,
-                                        isIntercalation: false)
+      let absDaysByMonth = algorithm.lunarAbsDays(year: lunarYear,
+                                                  month: month,
+                                                  day: 1,
+                                                  isIntercalation: false)
       if absDays >= absDaysByMonth {
         lunarMonth = month
         if dataSource.lunarIntercalationMonth(lunar: dataSource.lunar(year: lunarYear)) == month {
-          isIntercalation = absDays >= lunarAbsDays(year: lunarYear,
-                                                    month: month,
-                                                    day: 1,
-                                                    isIntercalation: true)
+          isIntercalation = absDays >= algorithm.lunarAbsDays(year: lunarYear,
+                                                              month: month,
+                                                              day: 1,
+                                                              isIntercalation: true)
         }
-
-        lunarDay = absDays - lunarAbsDays(year: lunarYear,
-                                          month: lunarMonth,
-                                          day: 1,
-                                          isIntercalation: isIntercalation) + 1
+        
+        lunarDay = absDays - algorithm.lunarAbsDays(year: lunarYear,
+                                                    month: lunarMonth,
+                                                    day: 1,
+                                                    isIntercalation: isIntercalation) + 1
         break
       }
     }
 
-    self.lunarYear = lunarYear
-    self.lunarMonth = lunarMonth
-    self.lunarDay = lunarDay
-    self.isIntercalation = isIntercalation
+    var lunarDate = Date()
+    lunarDate.year = lunarYear
+    lunarDate.month = lunarMonth
+    lunarDate.day = lunarDay
+    
+    return KoreanDate(date: lunarDate, isIntercalation: isIntercalation)
   }
 
   private func isValidDate(type: CalendarType,
                            isIntercalation: Bool,
-                           year: Int,
-                           month: Int,
-                           day: Int) -> Bool {
+                           date: Date) -> Bool {
+    let year = date.year
+    let month = date.month
+    let day = date.day
+    
     let dateValue = year*10000 + month*100 + day
     /// 1582. 10. 5 ~ 1582. 10. 14 is not valid
     
@@ -242,9 +175,9 @@ public final class KoreanLunarConverter {
         var dayLimit: Int
 
         if type == .lunar {
-          dayLimit = lunarDays(year: year,
-                               month: month,
-                               isIntercalation: isIntercalation)
+          dayLimit = algorithm.lunarDays(year: year,
+                                         month: month,
+                                         isIntercalation: isIntercalation)
         } else {
           dayLimit = solarDays(year: year, month: month)
         }
@@ -266,89 +199,26 @@ public final class KoreanLunarConverter {
     return false
   }
 
-  public func lunarDate(lunarYear: Int,
-                        lunarMonth: Int,
-                        lunarDay: Int,
-                        isIntercalation: Bool) -> Bool {
+  public func solarDate(fromLunar lunarDate: Date) throws -> KoreanDate {
 
     guard isValidDate(type: .lunar,
-                      isIntercalation: isIntercalation,
-                      year: lunarYear,
-                      month: lunarMonth,
-                      day: lunarDay)
-    else { return false }
-
-    self.lunarYear = lunarYear
-    self.lunarMonth = lunarMonth
-    self.lunarDay = lunarDay
-
-    self.isIntercalation = isIntercalation && dataSource.lunarIntercalationMonth(lunar: dataSource.lunar(year: lunarYear)) == lunarMonth
-    solarDateByLunarDate(lunarYear: lunarYear,
-                         lunarMonth: lunarMonth,
-                         lunarDay: lunarDay,
-                         isIntercalation: isIntercalation)
-
-    return true
+                      isIntercalation: true,
+                      date: lunarDate)
+    else { throw KoreanLunarConverterError.invalidDate }
+    
+    let lunar = dataSource.lunar(year: lunarDate.year)
+    let isIntercalation = dataSource.lunarIntercalationMonth(lunar: lunar) == lunarDate.month
+    let solarDate = solarDate(fromLunarDate: lunarDate, isIntercalation: isIntercalation)
+    
+    return KoreanDate(date: solarDate, isIntercalation: isIntercalation)
   }
 
-  public func solarDate(solarYear: Int,
-                        solarMonth: Int,
-                        solarDay: Int) -> Bool {
+  public func lunarDate(fromSolar solarDate: Date) throws -> KoreanDate {
     guard isValidDate(type: .solar,
                       isIntercalation: false,
-                      year: solarYear,
-                      month: solarMonth,
-                      day: solarDay)
-    else { return false }
-
-    self.solarYear = solarYear
-    self.solarMonth = solarMonth
-    self.solarDay = solarDay
-    lunarDateBySolarDate(solarYear: solarYear,
-                         solarMonth: solarMonth,
-                         solarDay: solarDay)
-
-    return true
-  }
-
-  private func setupGapJa() {
-    let absDays = lunarAbsDays(year: lunarYear,
-                               month: lunarMonth,
-                               day: lunarDay,
-                               isIntercalation: isIntercalation)
-    guard absDays > 0 else { return }
+                      date: solarDate)
+    else { throw KoreanLunarConverterError.invalidDate }
     
-    self.gapjaYearInx[0] = ((lunarYear + 6) - dataSource.lunarBaseYear) % koreanCheongan.count
-    self.gapjaYearInx[1] = ((lunarYear + 0) - dataSource.lunarBaseYear) % koreanGanji.count
-    
-    var monthCount = lunarMonth
-    monthCount += 12 * (lunarYear - dataSource.lunarBaseYear)
-    self.gapjaMonthInx[0] = (monthCount + 3) % koreanCheongan.count
-    self.gapjaMonthInx[1] = (monthCount + 1) % koreanGanji.count
-    
-    self.gapjaDayInx[0] = (absDays + 4) % koreanCheongan.count
-    self.gapjaDayInx[1] = (absDays + 2) % koreanGanji.count
-  }
-  
-  public var lunarDateString: String {
-    let result = "\(lunarYear)년 \(lunarMonth)월 \(lunarDay)일"
-    return isIntercalation ? result + "(윤달)" : result
-  }
-
-  public var lunarZodiac: String {
-    var first: String {
-      "\(koreanCheongan[gapjaYearInx[0]])\(koreanGanji[gapjaYearInx[1]])(\(chineseCheongan[gapjaYearInx[0]])\( chineseGanji[gapjaYearInx[1]]))\(koreanGapjaUnit[gapjaYearInx[2]])"
-    }
-
-    var second: String {
-      "\(koreanCheongan[gapjaMonthInx[0]])\(koreanGanji[gapjaMonthInx[1]])(\(chineseCheongan[gapjaMonthInx[0]])\(chineseGanji[gapjaMonthInx[1]]))\(koreanGapjaUnit[gapjaMonthInx[2]])"
-    }
-
-    var third: String {
-      "\(koreanCheongan[gapjaDayInx[0]])\(koreanGanji[gapjaDayInx[1]])(\(chineseCheongan[gapjaDayInx[0]])\(chineseGanji[gapjaDayInx[1]]))\(koreanGapjaUnit[gapjaDayInx[2]])"
-    }
-    setupGapJa()
-    
-    return "\(first) \(second) \(third)"
+    return lunarDate(fromSolarDate: solarDate)
   }
 }

@@ -10,39 +10,62 @@ import XCTest
 
 final class LunarToSolarTests: XCTestCase {
   func testLunarToSolar_1956_1_21() {
+    var lunarDate = Date()
+    lunarDate.year = 1956
+    lunarDate.month = 1
+    lunarDate.day = 21
+    
     let converter = KoreanLunarConverter()
-    converter.lunarDate(lunarYear: 1956, lunarMonth: 1, lunarDay: 21, isIntercalation: false)
+    let convertedDate = try? converter.solarDate(fromLunar: lunarDate)
 
-    var result = Date()
-    result.year = 1956
-    result.month = 3
-    result.day = 3
-    XCTAssertTrue(converter.solarDate === result)
-    XCTAssertEqual("병신(丙申)년 경인(庚寅)월 기사(己巳)일", converter.lunarZodiac)
+    var target = Date()
+    target.year = 1956
+    target.month = 3
+    target.day = 3
+    XCTAssertTrue(convertedDate!.date === target)
+    
+    
+    let formetter = KoreanLunarStringFormatter()
+    XCTAssertEqual("병신(丙申)년 경인(庚寅)월 기사(己巳)일", formetter.lunarZodiac(fromLunar: lunarDate))
   }
   
   func testLunarToSolar_1914_06_24() {
-    let converter = KoreanLunarConverter()
-    converter.lunarDate(lunarYear: 1914, lunarMonth: 6, lunarDay: 24, isIntercalation: false)
+    var lunarDate = Date()
+    lunarDate.year = 1914
+    lunarDate.month = 6
+    lunarDate.day = 24
     
-    var result = Date()
-    result.year = 1914
-    result.month = 8
-    result.day = 15
-    XCTAssertTrue(converter.solarDate === result)
-    XCTAssertEqual("갑인(甲寅)년 신미(辛未)월 계유(癸酉)일", converter.lunarZodiac)
+    let converter = KoreanLunarConverter()
+    let convertedDate = try? converter.solarDate(fromLunar: lunarDate)
+
+    var target = Date()
+    target.year = 1914
+    target.month = 8
+    target.day = 15
+    XCTAssertTrue(convertedDate!.date === target)
+    
+    
+    let formetter = KoreanLunarStringFormatter()
+    XCTAssertEqual("갑인(甲寅)년 신미(辛未)월 계유(癸酉)일", formetter.lunarZodiac(fromLunar: lunarDate))
   }
   
   func testLunarToSolar_2017_06_29() {
-    let converter = KoreanLunarConverter()
-    converter.lunarDate(lunarYear: 2017, lunarMonth: 6, lunarDay: 29, isIntercalation: false)
-
-    var result = Date()
-    result.year = 2017
-    result.month = 8
-    result.day = 20
+    var lunarDate = Date()
+    lunarDate.year = 2017
+    lunarDate.month = 6
+    lunarDate.day = 29
     
-    XCTAssertTrue(converter.solarDate === result)
-    XCTAssertEqual("정유(丁酉)년 정미(丁未)월 기묘(己卯)일", converter.lunarZodiac)
+    let converter = KoreanLunarConverter()
+    let convertedDate = try? converter.solarDate(fromLunar: lunarDate)
+
+    var target = Date()
+    target.year = 2017
+    target.month = 8
+    target.day = 20
+    XCTAssertTrue(convertedDate!.date === target)
+    
+    
+    let formetter = KoreanLunarStringFormatter()
+    XCTAssertEqual("정유(丁酉)년 정미(丁未)월 기묘(己卯)일", formetter.lunarZodiac(fromLunar: lunarDate))
   }
 }
