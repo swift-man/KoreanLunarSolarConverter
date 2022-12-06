@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		E50ED249293CC14400679B9D /* LunarSunConverter.docc in Sources */ = {isa = PBXBuildFile; fileRef = E50ED248293CC14400679B9D /* LunarSunConverter.docc */; };
 		E50ED24F293CC14500679B9D /* LunarSunConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E50ED244293CC14400679B9D /* LunarSunConverter.framework */; };
-		E50ED254293CC14500679B9D /* LunarSunConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50ED253293CC14500679B9D /* LunarSunConverterTests.swift */; };
 		E50ED255293CC14500679B9D /* LunarSunConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = E50ED247293CC14400679B9D /* LunarSunConverter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E50ED264293CC16E00679B9D /* SunLunar.m in Sources */ = {isa = PBXBuildFile; fileRef = E50ED262293CC16D00679B9D /* SunLunar.m */; };
 		E50ED265293CC16E00679B9D /* SunLunar.h in Headers */ = {isa = PBXBuildFile; fileRef = E50ED263293CC16D00679B9D /* SunLunar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E50ED26C293F665700679B9D /* KoreanLunarCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50ED26B293F665700679B9D /* KoreanLunarCalendar.swift */; };
-		E50ED26D293F7A6800679B9D /* KoreanLunarCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50ED26B293F665700679B9D /* KoreanLunarCalendar.swift */; };
+		E50ED26C293F665700679B9D /* KoreanLunarConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50ED26B293F665700679B9D /* KoreanLunarConverter.swift */; };
+		E50ED26D293F7A6800679B9D /* KoreanLunarConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50ED26B293F665700679B9D /* KoreanLunarConverter.swift */; };
+		E56A4585293F9EE2001CE6C1 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56A4584293F9EE2001CE6C1 /* Date+.swift */; };
+		E56A4586293F9EF2001CE6C1 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56A4584293F9EE2001CE6C1 /* Date+.swift */; };
+		E56A4588293F9F5E001CE6C1 /* LunarToSolarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56A4587293F9F5E001CE6C1 /* LunarToSolarTests.swift */; };
+		E56A458A293F9F6B001CE6C1 /* SolarToLunarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56A4589293F9F6B001CE6C1 /* SolarToLunarTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,10 +35,12 @@
 		E50ED247293CC14400679B9D /* LunarSunConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LunarSunConverter.h; sourceTree = "<group>"; };
 		E50ED248293CC14400679B9D /* LunarSunConverter.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = LunarSunConverter.docc; sourceTree = "<group>"; };
 		E50ED24E293CC14500679B9D /* LunarSunConverterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LunarSunConverterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E50ED253293CC14500679B9D /* LunarSunConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunarSunConverterTests.swift; sourceTree = "<group>"; };
 		E50ED262293CC16D00679B9D /* SunLunar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SunLunar.m; sourceTree = "<group>"; };
 		E50ED263293CC16D00679B9D /* SunLunar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SunLunar.h; sourceTree = "<group>"; };
-		E50ED26B293F665700679B9D /* KoreanLunarCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanLunarCalendar.swift; sourceTree = "<group>"; };
+		E50ED26B293F665700679B9D /* KoreanLunarConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanLunarConverter.swift; sourceTree = "<group>"; };
+		E56A4584293F9EE2001CE6C1 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		E56A4587293F9F5E001CE6C1 /* LunarToSolarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunarToSolarTests.swift; sourceTree = "<group>"; };
+		E56A4589293F9F6B001CE6C1 /* SolarToLunarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarToLunarTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +86,8 @@
 				E50ED247293CC14400679B9D /* LunarSunConverter.h */,
 				E50ED263293CC16D00679B9D /* SunLunar.h */,
 				E50ED262293CC16D00679B9D /* SunLunar.m */,
-				E50ED26B293F665700679B9D /* KoreanLunarCalendar.swift */,
+				E50ED26B293F665700679B9D /* KoreanLunarConverter.swift */,
+				E56A4584293F9EE2001CE6C1 /* Date+.swift */,
 				E50ED248293CC14400679B9D /* LunarSunConverter.docc */,
 			);
 			path = LunarSunConverter;
@@ -90,7 +96,8 @@
 		E50ED252293CC14500679B9D /* LunarSunConverterTests */ = {
 			isa = PBXGroup;
 			children = (
-				E50ED253293CC14500679B9D /* LunarSunConverterTests.swift */,
+				E56A4587293F9F5E001CE6C1 /* LunarToSolarTests.swift */,
+				E56A4589293F9F6B001CE6C1 /* SolarToLunarTests.swift */,
 			);
 			path = LunarSunConverterTests;
 			sourceTree = "<group>";
@@ -118,7 +125,6 @@
 				E50ED240293CC14400679B9D /* Sources */,
 				E50ED241293CC14400679B9D /* Frameworks */,
 				E50ED242293CC14400679B9D /* Resources */,
-				E50ED26E293F8DE600679B9D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -206,34 +212,15 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		E50ED26E293F8DE600679B9D /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		E50ED240293CC14400679B9D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E50ED26C293F665700679B9D /* KoreanLunarCalendar.swift in Sources */,
+				E50ED26C293F665700679B9D /* KoreanLunarConverter.swift in Sources */,
 				E50ED249293CC14400679B9D /* LunarSunConverter.docc in Sources */,
 				E50ED264293CC16E00679B9D /* SunLunar.m in Sources */,
+				E56A4585293F9EE2001CE6C1 /* Date+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,8 +228,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E50ED26D293F7A6800679B9D /* KoreanLunarCalendar.swift in Sources */,
-				E50ED254293CC14500679B9D /* LunarSunConverterTests.swift in Sources */,
+				E56A458A293F9F6B001CE6C1 /* SolarToLunarTests.swift in Sources */,
+				E56A4586293F9EF2001CE6C1 /* Date+.swift in Sources */,
+				E50ED26D293F7A6800679B9D /* KoreanLunarConverter.swift in Sources */,
+				E56A4588293F9F5E001CE6C1 /* LunarToSolarTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
