@@ -1,5 +1,5 @@
 //
-//  KoreanLunarCalendar.swift
+//  KoreanLunarConverter.swift
 //  LunarSunConverter
 //
 //  Created by SwiftMan on 2022/12/06.
@@ -8,10 +8,25 @@
 import Foundation
 
 public final class KoreanLunarConverter {
-  private let koreanLunarMinValue = 10000101
-  private let koreanLunarMaxValue = 20501118
-  private let koreanSolarMinValue = 10000213
-  private let koreanSolarMaxValue = 20501231
+  enum CalendarType {
+    case lunar
+    case solar
+  }
+  
+  enum LimiteDate: Int {
+    case lunarMin = 10000101
+    case lunarMax = 20501118
+    case solarMin = 10000213
+    case solarMax = 20501231
+    
+    static func min(calendarType: CalendarType) -> LimiteDate {
+      calendarType == .lunar ? .lunarMin : .solarMin
+    }
+    
+    static func max(calendarType: CalendarType) -> LimiteDate {
+      calendarType == .lunar ? .lunarMax : .solarMax
+    }
+  }
 
   private let koreanLunarBaseYear = 1000
   private let solarLunarDayDiff = 43
@@ -150,16 +165,20 @@ public final class KoreanLunarConverter {
   private var gapjaMonthInx = [0, 0, 1]
   private var gapjaDayInx = [0, 0, 2]
 
-  public var lunarIsoFormat: String {
-    var dateStr = String(format: "%04d-%02d-%02d", self.lunarYear, self.lunarMonth, self.lunarDay)
-    if self.isIntercalation {
-      dateStr += " Intercalation"
-    }
-    return dateStr
+  public var lunarDate: Date {
+    var result = Date()
+    result.year = lunarYear
+    result.month = lunarMonth
+    result.day = lunarDay
+    return result
   }
 
-  public var solarIsoFormat: String {
-    return String(format: "%04d-%02d-%02d", self.solarYear, self.solarMonth, self.solarDay)
+  public var solarDate: Date {
+    var result = Date()
+    result.year = solarYear
+    result.month = solarMonth
+    result.day = solarDay
+    return result
   }
 
   private func lunar(year: Int) -> Int {
@@ -327,21 +346,22 @@ public final class KoreanLunarConverter {
     self.isIntercalation = isIntercalation
   }
 
-  private func isValidDate(isLunar: Bool,
+  private func isValidDate(type: CalendarType,
                            isIntercalation: Bool,
                            year: Int,
                            month: Int,
                            day: Int) -> Bool {
     let dateValue = year*10000 + month*100 + day
     /// 1582. 10. 5 ~ 1582. 10. 14 is not valid
-    let minValue = isLunar ? koreanLunarMinValue : koreanSolarMinValue
-    let maxValue = isLunar ? koreanLunarMaxValue : koreanSolarMaxValue
+    
+    let minValue = LimiteDate.min(calendarType: type).rawValue
+    let maxValue = LimiteDate.max(calendarType: type).rawValue
 
     if minValue <= dateValue && maxValue >= dateValue {
       if month > 0 && month < 13 && day > 0 {
         var dayLimit: Int
 
-        if isLunar {
+        if type == .lunar {
           dayLimit = lunarDays(year: year,
                                month: month,
                                isIntercalation: isIntercalation)
@@ -349,7 +369,7 @@ public final class KoreanLunarConverter {
           dayLimit = solarDays(year: year, month: month)
         }
 
-        if !isLunar && year == 1582 && month == 10 {
+        if type == .solar && year == 1582 && month == 10 {
           if day > 4 && day < 15 {
             return false
           } else {
@@ -371,7 +391,7 @@ public final class KoreanLunarConverter {
                         lunarDay: Int,
                         isIntercalation: Bool) -> Bool {
 
-    guard isValidDate(isLunar: true,
+    guard isValidDate(type: .lunar,
                       isIntercalation: isIntercalation,
                       year: lunarYear,
                       month: lunarMonth,
@@ -394,8 +414,7 @@ public final class KoreanLunarConverter {
   public func solarDate(solarYear: Int,
                         solarMonth: Int,
                         solarDay: Int) -> Bool {
-    
-    guard isValidDate(isLunar: false,
+    guard isValidDate(type: .solar,
                       isIntercalation: false,
                       year: solarYear,
                       month: solarMonth,
@@ -417,7 +436,6 @@ public final class KoreanLunarConverter {
                                month: lunarMonth,
                                day: lunarDay,
                                isIntercalation: isIntercalation)
-    
     guard absDays > 0 else { return }
     
     self.gapjaYearInx[0] = ((lunarYear + 6) - koreanLunarBaseYear) % koreanCheongan.count
@@ -430,6 +448,11 @@ public final class KoreanLunarConverter {
     
     self.gapjaDayInx[0] = (absDays + 4) % koreanCheongan.count
     self.gapjaDayInx[1] = (absDays + 2) % koreanGanji.count
+  }
+  
+  public var lunarDateString: String {
+    let result = "\(lunarYear)년 \(lunarMonth)월 \(lunarDay)일"
+    return isIntercalation ? result + "(윤달)" : result
   }
 
   public var lunarZodiac: String {
@@ -445,13 +468,7 @@ public final class KoreanLunarConverter {
       "\(koreanCheongan[gapjaDayInx[0]])\(koreanGanji[gapjaDayInx[1]])(\(chineseCheongan[gapjaDayInx[0]])\(chineseGanji[gapjaDayInx[1]]))\(koreanGapjaUnit[gapjaDayInx[2]])"
     }
     setupGapJa()
-    var gapja = "\(first) \(second) \(third)"
-
-    if self.isIntercalation {
-      gapja += " (윤달)"
-
-    }
-
-    return gapja
+    
+    return "\(first) \(second) \(third)"
   }
 }
