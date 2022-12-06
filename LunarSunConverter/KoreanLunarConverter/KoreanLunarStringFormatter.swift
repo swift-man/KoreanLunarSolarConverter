@@ -16,7 +16,7 @@ public final class KoreanLunarStringFormatter {
   
   private let dataSource = KoreanLunarDataSource()
   private let algorithm = KoreanLunarAlgorithm()
-  private let converter = KoreanLunarConverter()
+  private let converter = KoreanSolarToLunarConverter()
   
   public init() {
     

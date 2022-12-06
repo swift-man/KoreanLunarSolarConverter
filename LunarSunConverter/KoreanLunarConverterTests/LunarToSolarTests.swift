@@ -15,7 +15,7 @@ final class LunarToSolarTests: XCTestCase {
     lunarDate.month = 1
     lunarDate.day = 21
     
-    let converter = KoreanLunarConverter()
+    let converter = KoreanLunarToSolarConverter()
     let convertedDate = try? converter.solarDate(fromLunar: lunarDate)
 
     var target = Date()
@@ -35,7 +35,7 @@ final class LunarToSolarTests: XCTestCase {
     lunarDate.month = 6
     lunarDate.day = 24
     
-    let converter = KoreanLunarConverter()
+    let converter = KoreanLunarToSolarConverter()
     let convertedDate = try? converter.solarDate(fromLunar: lunarDate)
 
     var target = Date()
@@ -55,7 +55,7 @@ final class LunarToSolarTests: XCTestCase {
     lunarDate.month = 6
     lunarDate.day = 29
     
-    let converter = KoreanLunarConverter()
+    let converter = KoreanLunarToSolarConverter()
     let convertedDate = try? converter.solarDate(fromLunar: lunarDate)
 
     var target = Date()
