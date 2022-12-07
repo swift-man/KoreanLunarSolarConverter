@@ -54,15 +54,19 @@ import KoreanLunarConverter
 
 ```swift
 // Date to Date
+let lunarDate: Date
 let converter = KoreanLunarToSolarConverter()
-let solarDate = try? converter.solarDate(fromLunar: lunarDate)
+let solar = try? converter.solarDate(fromLunar: lunarDate)
+let solarDate: Date? = solar?.date
 ```
 
 (2) Korean Solar Date -> Korean Lunar Date (양력 -> 음력)
 
 ```swift
+let solarDate: Date
 let converter = KoreanSolarToLunarConverter()
-let lunarDate = try? converter.lunarDate(fromSolar: solarDate)
+let lunar = try? converter.lunarDate(fromSolar: solarDate)
+let lunarDate: Date? = lunar?.date
 ```
 
 (3) Korean Date String Format
@@ -74,4 +78,13 @@ let formetter = KoreanLunarStringFormatter()
 formetter.lunarDateString(fromSolar: solarDate)) // 2022년 12월 4일(평달)
 formetter.lunarZodiac(fromSolar: solarDate)) // 임인(壬寅)년 계축(癸丑)월 계축(癸丑)일
 formetter.lunarZodiac(fromLunar: lunarDate)) // 임인(壬寅)년 계축(癸丑)월 계축(癸丑)일
+```
+
+(4) Result KoreanDate
+
+```swift
+struct KoreanDate {
+  let date: Date // converted Date
+  let isIntercalation: Bool // 윤달 여부
+}
 ```
