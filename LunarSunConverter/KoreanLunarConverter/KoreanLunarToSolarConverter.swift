@@ -25,8 +25,7 @@ public final class KoreanLunarToSolarConverter {
       lunarDateRangeChecker.isValidDate(lunarDate: lunarDate, dayLimit: dayLimit)
     else { throw KoreanLunarConvertError.invalidDate }
 
-    let lunar = dataSource.lunar(year: lunarDate.year)
-    let isIntercalation = dataSource.lunarIntercalationMonth(lunar: lunar) == lunarDate.month
+    let isIntercalation = dataSource.lunarIntercalationMonth(year: lunarDate.year) == lunarDate.month
     let solarDate = solarDate(fromLunarDate: lunarDate, isIntercalation: isIntercalation)
 
     return KoreanDate(date: solarDate, isIntercalation: isIntercalation)
@@ -40,13 +39,10 @@ extension KoreanLunarToSolarConverter {
                                               month: date.month,
                                               day: date.day,
                                               isIntercalation: isIntercalation)
-    var solarYear = 0
+    
+    let solarYear = makeSolarYear(fromLunarYear: lunarYear, absDays: absDays)
     var solarMonth = 0
     var solarDay = 0
-
-    solarYear = absDays < solarAlgorithm.solarAbsDays(year: lunarYear+1,
-                                                      month: 1,
-                                                      day: 1) ? lunarYear : lunarYear+1
 
     for month in stride(from: 12, through: 1, by: -1) {
       let absDaysByMonth = solarAlgorithm.solarAbsDays(year: solarYear,
@@ -65,5 +61,15 @@ extension KoreanLunarToSolarConverter {
     solarDate.day = solarDay
 
     return solarDate
+  }
+  
+  private func makeSolarYear(fromLunarYear lunarYear: Int, absDays: Int) -> Int {
+    if absDays < solarAlgorithm.solarAbsDays(year: lunarYear + 1,
+                                             month: 1,
+                                             day: 1) {
+      return lunarYear
+    }
+    
+    return lunarYear + 1
   }
 }

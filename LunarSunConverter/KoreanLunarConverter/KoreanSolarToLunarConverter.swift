@@ -36,10 +36,8 @@ extension KoreanSolarToLunarConverter {
     let absDays = solarAlgorithm.solarAbsDays(year: solarYear,
                                               month: solarMonth,
                                               day: solarDay)
-    let lunarYear = absDays >= lunarAlgorithm.lunarAbsDays(year: solarYear,
-                                                           month: 1,
-                                                           day: 1,
-                                                           isIntercalation: false) ? solarYear : solarYear - 1
+    
+    let lunarYear = makeLunarYear(fromSolarYear: solarYear, absDays: absDays)
     var lunarMonth = 0
     var lunarDay = 0
     var isIntercalation = false
@@ -51,7 +49,7 @@ extension KoreanSolarToLunarConverter {
                                                        isIntercalation: false)
       if absDays >= absDaysByMonth {
         lunarMonth = month
-        if dataSource.lunarIntercalationMonth(lunar: dataSource.lunar(year: lunarYear)) == month {
+        if dataSource.lunarIntercalationMonth(year: lunarYear) == month {
           isIntercalation = absDays >= lunarAlgorithm.lunarAbsDays(year: lunarYear,
                                                                    month: month,
                                                                    day: 1,
@@ -72,5 +70,16 @@ extension KoreanSolarToLunarConverter {
     lunarDate.day = lunarDay
     
     return KoreanDate(date: lunarDate, isIntercalation: isIntercalation)
+  }
+  
+  private func makeLunarYear(fromSolarYear solarYear: Int, absDays: Int) -> Int {
+    if absDays >= lunarAlgorithm.lunarAbsDays(year: solarYear,
+                                              month: 1,
+                                              day: 1,
+                                              isIntercalation: false) {
+      return solarYear
+    }
+    
+    return solarYear - 1
   }
 }
