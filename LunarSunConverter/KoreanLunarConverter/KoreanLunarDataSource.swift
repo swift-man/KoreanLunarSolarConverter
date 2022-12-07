@@ -125,4 +125,8 @@ final class KoreanLunarDataSource {
   func lunarIntercalationMonth(lunar: Int) -> Int {
     return (lunar >> 12) & 0x000F
   }
+  
+  func lunarIntercalationMonth(year: Int) -> Int {
+    return lunarIntercalationMonth(lunar: lunar(year: year))
+  }
 }
