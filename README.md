@@ -29,6 +29,11 @@ This follow the KARI(Korea Astronomy and Space Science Institute)
 Gregorian calendar (1000-02-13 ~ 2050-12-31) <--> Korean lunar-calendar (1000-01-01 ~ 2050-11-18)
 ```
 
+## Feature
+- [ ] KoreanLunarStringFormatter.lunarDateString(fromLunar:)
+- [ ] KoreanLunarStringFormatter.style `short`, `full` ...
+- [ ] param date -> resultDate.midnight
+
 #### Install
 
 ```
@@ -45,19 +50,22 @@ dependencies: [
 import KoreanLunarConverter
 ```
 
-(1) Korean Solar Date -> Korean Lunar Date (양력 -> 음력)
+(1) Korean Lunar Date -> Korean Solar Date (음력 -> 양력)
 
 ```swift
+// Date to Date
 let converter = KoreanLunarToSolarConverter()
 let solarDate = try? converter.solarDate(fromLunar: lunarDate)
-
-// 20170629
 ```
+
+(2) Korean Solar Date -> Korean Lunar Date (양력 -> 음력)
 
 ```swift
 let converter = KoreanSolarToLunarConverter()
 let lunarDate = try? converter.lunarDate(fromSolar: solarDate)
 ```
+
+(3) Korean Date String Format
 
 ```swift
 let lunarDate: Date // 20221204
