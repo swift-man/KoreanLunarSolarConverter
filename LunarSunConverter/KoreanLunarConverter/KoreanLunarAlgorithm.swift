@@ -33,10 +33,13 @@ final class KoreanLunarAlgorithm {
       let isIntercalation
     else { return (lunar >> 17) & 0x01FF }
 
+    let lunarSmallMonthDay = 29
+    let lunarBigMonthDay = 30
+    
     if isIntercalation && dataSource.lunarIntercalationMonth(lunar: lunar) == month {
-      return ((lunar >> 16) & 0x01) > 0 ? dataSource.lunarBigMonthDay : dataSource.lunarSmallMonthDay
+      return ((lunar >> 16) & 0x01) > 0 ? lunarBigMonthDay : lunarSmallMonthDay
     }
-    return ((lunar >> (12 - month)) & 0x01) > 0 ? dataSource.lunarBigMonthDay : dataSource.lunarSmallMonthDay
+    return ((lunar >> (12 - month)) & 0x01) > 0 ? lunarBigMonthDay : lunarSmallMonthDay
   }
 }
 
