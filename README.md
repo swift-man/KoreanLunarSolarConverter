@@ -11,7 +11,7 @@
 
 changed start year to support conversion from 1391 to 1000  
 
-[한국천문연구원](https://astro.kasi.re.kr/life/pageView/8)
+[한국천문연구원](https://astro.kasi.re.kr/life/pageView/8)  
 
 #### Overview
 
@@ -83,6 +83,8 @@ formetter.lunarZodiac(fromLunar: lunarDate)) // 임인(壬寅)년 계축(癸丑)
 ```
 
 (4) Result KoreanDate
+
+[나무위키 - 윤달](https://namu.wiki/w/%EC%9C%A4%EB%8B%AC)  
 
 ```swift
 struct KoreanDate {
