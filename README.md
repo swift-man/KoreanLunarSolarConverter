@@ -4,14 +4,13 @@
 한국 양음력 변환
 
 ![Badge](https://img.shields.io/badge/swift-white.svg?style=flat-square&logo=Swift)
-![Badge - Version](https://img.shields.io/badge/Version-0.5.0-1177AA?style=flat-square)
+![Badge - Version](https://img.shields.io/badge/Version-0.6.0-1177AA?style=flat-square)
 ![Badge - Swift Package Manager](https://img.shields.io/badge/SPM-compatible-orange?style=flat-square)
 ![Badge - Platform](https://img.shields.io/badge/platform-mac|ios|watchos|tvos-yellow?style=flat-square)
 ![Badge - License](https://img.shields.io/badge/license-MIT-black?style=flat-square)
 
 changed start year to support conversion from 1391 to 1000  
 
-[한국천문연구원](https://astro.kasi.re.kr/life/pageView/8)  
 
 #### Overview
 
@@ -21,7 +20,7 @@ Korean calendar and Chinese calendar is same lunar calendar but have different d
 
 This follow the KARI(Korea Astronomy and Space Science Institute)
 
-한국 양음력 변환 (한국천문연구원 기준) - 네트워크 연결 불필요
+한국 양음력 변환 ([한국천문연구원](https://astro.kasi.re.kr/life/pageView/8) 기준) - 네트워크 연결 불필요
 
 음력 변환은 1000년 01월 01일 부터 2050년 11월 18일까지 지원
 
@@ -92,3 +91,6 @@ struct KoreanDate {
   let isIntercalation: Bool // 윤달 여부
 }
 ```
+
+#### 참고 Extension
+[SwifterSwift DateExtensions](https://github.com/SwifterSwift/SwifterSwift/blob/master/Sources/SwifterSwift/Foundation/DateExtensions.swift)
