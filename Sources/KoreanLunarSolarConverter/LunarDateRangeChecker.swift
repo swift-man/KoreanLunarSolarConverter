@@ -8,24 +8,47 @@
 import Foundation
 
 final class LunarDateRangeChecker {
-  func isValidDate(lunarDate: Date, dayLimit: Int) -> Bool {
+  func isValidDate(lunarDate: Date) -> Bool {
+    var minDate: Date {
+      var date = Date()
+      date.year = 1000
+      date.month = 1
+      date.day = 1
+      date.hour = 0
+      date.minute = 0
+      date.second = 0
+      date.nanosecond = 0
+      date.millisecond = 0
+      return date
+    }
+    
+    var maxDate: Date {
+      var date = Date()
+      date.year = 2050
+      date.month = 11
+      date.day = 19
+      date.hour = 0
+      date.minute = 0
+      date.second = 0
+      date.nanosecond = 0
+      date.millisecond = 0
+      return date
+    }
+    
+    var validRange: ClosedRange<Date> {
+      minDate ... maxDate
+    }
+    
     let year = lunarDate.year
     let month = lunarDate.month
     let day = lunarDate.day
+
+    guard validRange.contains(lunarDate) else { return false }
     
-    let dateValue = year*10000 + month*100 + day
-
-    let minValue = 10000101
-    let maxValue = 20501118
-
-    if minValue <= dateValue && maxValue >= dateValue {
-      if month > 0 && month < 13 && day > 0 {
-        if day <= dayLimit {
-          return true
-        }
-      }
-    }
-
-    return false
+    let dayLimit = KoreanLunarAlgorithm().lunarDays(year: year,
+                                                    month: month,
+                                                    isIntercalation: true)
+    
+    return day <= dayLimit
   }
 }

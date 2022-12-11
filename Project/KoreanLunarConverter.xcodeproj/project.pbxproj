@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E50ED24F293CC14500679B9D /* KoreanLunarConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E50ED244293CC14400679B9D /* KoreanLunarConverter.framework */; };
 		E50ED255293CC14500679B9D /* KoreanLunarConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = E50ED247293CC14400679B9D /* KoreanLunarConverter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E54955D029462DE600D7377F /* LunarDateRangeCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54955CF29462DE600D7377F /* LunarDateRangeCheckerTests.swift */; };
+		E54955D229462F3B00D7377F /* SolarDateRangeCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54955D129462F3B00D7377F /* SolarDateRangeCheckerTests.swift */; };
 		E55605692940D22600EDE888 /* KoreanDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E556055E2940D22600EDE888 /* KoreanDate.swift */; };
 		E556056A2940D22600EDE888 /* KoreanDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E556055E2940D22600EDE888 /* KoreanDate.swift */; };
 		E556056B2940D22600EDE888 /* KoreanLunarConvertError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E556055F2940D22600EDE888 /* KoreanLunarConvertError.swift */; };
@@ -49,6 +51,8 @@
 		E50ED244293CC14400679B9D /* KoreanLunarConverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KoreanLunarConverter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E50ED247293CC14400679B9D /* KoreanLunarConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KoreanLunarConverter.h; sourceTree = "<group>"; };
 		E50ED24E293CC14500679B9D /* KoreanLunarConverterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KoreanLunarConverterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E54955CF29462DE600D7377F /* LunarDateRangeCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunarDateRangeCheckerTests.swift; sourceTree = "<group>"; };
+		E54955D129462F3B00D7377F /* SolarDateRangeCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarDateRangeCheckerTests.swift; sourceTree = "<group>"; };
 		E556055E2940D22600EDE888 /* KoreanDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KoreanDate.swift; path = ../../Sources/KoreanLunarSolarConverter/KoreanDate.swift; sourceTree = "<group>"; };
 		E556055F2940D22600EDE888 /* KoreanLunarConvertError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KoreanLunarConvertError.swift; path = ../../Sources/KoreanLunarSolarConverter/KoreanLunarConvertError.swift; sourceTree = "<group>"; };
 		E55605602940D22600EDE888 /* KoreanLunarDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KoreanLunarDataSource.swift; path = ../../Sources/KoreanLunarSolarConverter/KoreanLunarDataSource.swift; sourceTree = "<group>"; };
@@ -125,6 +129,8 @@
 			children = (
 				E55605802940D23B00EDE888 /* LunarToSolarTests.swift */,
 				E556057F2940D23B00EDE888 /* SolarToLunarTests.swift */,
+				E54955CF29462DE600D7377F /* LunarDateRangeCheckerTests.swift */,
+				E54955D129462F3B00D7377F /* SolarDateRangeCheckerTests.swift */,
 			);
 			path = KoreanLunarConverterTests;
 			sourceTree = "<group>";
@@ -262,8 +268,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E54955D029462DE600D7377F /* LunarDateRangeCheckerTests.swift in Sources */,
 				E556057E2940D22600EDE888 /* Date+.swift in Sources */,
 				E55605782940D22600EDE888 /* LunarDateRangeChecker.swift in Sources */,
+				E54955D229462F3B00D7377F /* SolarDateRangeCheckerTests.swift in Sources */,
 				E55605742940D22600EDE888 /* KoreanLunarStringFormatter.swift in Sources */,
 				E55605812940D23C00EDE888 /* SolarToLunarTests.swift in Sources */,
 				E55605722940D22600EDE888 /* KoreanSolarToLunarConverter.swift in Sources */,

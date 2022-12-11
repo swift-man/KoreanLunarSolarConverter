@@ -8,36 +8,45 @@
 import Foundation
 
 final class SolarDateRangeChecker {
-  func isValidDate(solarDate: Date,
-                   dayLimit: Int) -> Bool {
+  func isValidDate(solarDate: Date) -> Bool {
+    var minDate: Date {
+      var date = Date()
+      date.year = 1000
+      date.month = 2
+      date.day = 13
+      date.hour = 0
+      date.minute = 0
+      date.second = 0
+      date.nanosecond = 0
+      date.millisecond = 0
+      return date
+    }
+    
+    var maxDate: Date {
+      var date = Date()
+      date.year = 2051
+      date.month = 1
+      date.day = 1
+      date.hour = 0
+      date.minute = 0
+      date.second = 0
+      date.nanosecond = 0
+      date.millisecond = 0
+      return date
+    }
+    
+    var validRange: ClosedRange<Date> {
+      minDate ... maxDate
+    }
+    
     let year = solarDate.year
     let month = solarDate.month
     let day = solarDate.day
     
-    let dateValue = year*10000 + month*100 + day
+    guard validRange.contains(solarDate) else { return false }
     
-    let solarMin = 10000213
-    let solarMax = 20501231
-
-    if solarMin <= dateValue && solarMax >= dateValue {
-      if month > 0 && month < 13 && day > 0 {
-        var dayLimit = dayLimit
-
-        /// 1582. 10. 5 ~ 1582. 10. 14 is not valid
-        if year == 1582 && month == 10 {
-          if day > 4 && day < 15 {
-            return false
-          } else {
-            dayLimit += 10
-          }
-        }
-
-        if day <= dayLimit {
-          return true
-        }
-      }
-    }
-
-    return false
+    let dayLimit = KoreanSolarAlgorithm().solarDays(year: year, month: month)
+    
+    return day <= dayLimit
   }
 }

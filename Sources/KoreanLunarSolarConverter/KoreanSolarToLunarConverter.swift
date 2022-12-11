@@ -18,9 +18,7 @@ public final class KoreanSolarToLunarConverter {
   }
 
   public func lunarDate(fromSolar solarDate: Date) throws -> KoreanDate {
-    let dayLimit = solarAlgorithm.solarDays(year: solarDate.year, month: solarDate.month)
-    guard
-      solarDateRangeChecker.isValidDate(solarDate: solarDate, dayLimit: dayLimit)
+    guard solarDateRangeChecker.isValidDate(solarDate: solarDate)
     else { throw KoreanLunarConvertError.invalidDate }
     
     return lunarDate(fromSolarDate: solarDate)
