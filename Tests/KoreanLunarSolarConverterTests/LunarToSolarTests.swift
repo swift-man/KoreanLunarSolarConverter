@@ -68,4 +68,64 @@ final class LunarToSolarTests: XCTestCase {
     let formetter = KoreanLunarStringFormatter()
     XCTAssertEqual("정유(丁酉)년 정미(丁未)월 기묘(己卯)일", formetter.lunarZodiac(fromLunar: lunarDate))
   }
+  
+  func testLunarToSolar_1727_03_01() {
+    var lunarDate = Date()
+    lunarDate.year = 1727
+    lunarDate.month = 3
+    lunarDate.day = 1
+    
+    let converter = KoreanLunarToSolarConverter()
+    let convertedDate = try? converter.solarDate(fromLunar: lunarDate)
+
+    var target = Date()
+    target.year = 1727
+    target.month = 4
+    target.day = 21
+    XCTAssertTrue(convertedDate!.date === target)
+    
+    let formetter = KoreanLunarStringFormatter()
+    XCTAssertEqual("1727년 3월 1일(윤달)", formetter.lunarDateString(fromSolar: target))
+    XCTAssertEqual("정미(丁未)년 갑진(甲辰)월 정사(丁巳)일", formetter.lunarZodiac(fromSolar: target))
+  }
+  
+  func testLunarToSolar_1959_05_28() {
+    var lunarDate = Date()
+    lunarDate.year = 1959
+    lunarDate.month = 5
+    lunarDate.day = 28
+    
+    let converter = KoreanLunarToSolarConverter()
+    let convertedDate = try? converter.solarDate(fromLunar: lunarDate)
+
+    var target = Date()
+    target.year = 1959
+    target.month = 7
+    target.day = 3
+    XCTAssertTrue(convertedDate!.date === target)
+    
+    let formetter = KoreanLunarStringFormatter()
+    XCTAssertEqual("1959년 5월 28일(평달)", formetter.lunarDateString(fromSolar: target))
+    XCTAssertEqual("기해(己亥)년 경오(庚午)월 병술(丙戌)일", formetter.lunarZodiac(fromSolar: target))
+  }
+  
+  func testLunarToSolar_1959_10_08() {
+    var lunarDate = Date()
+    lunarDate.year = 1959
+    lunarDate.month = 10
+    lunarDate.day = 8
+    
+    let converter = KoreanLunarToSolarConverter()
+    let convertedDate = try? converter.solarDate(fromLunar: lunarDate)
+
+    var target = Date()
+    target.year = 1959
+    target.month = 11
+    target.day = 8
+    XCTAssertTrue(convertedDate!.date === target)
+    
+    let formetter = KoreanLunarStringFormatter()
+    XCTAssertEqual("1959년 10월 8일(평달)", formetter.lunarDateString(fromSolar: target))
+    XCTAssertEqual("기해(己亥)년 을해(乙亥)월 갑오(甲午)일", formetter.lunarZodiac(fromSolar: target))
+  }
 }
