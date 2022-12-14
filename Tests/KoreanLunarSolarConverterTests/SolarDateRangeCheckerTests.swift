@@ -25,6 +25,10 @@ final class SolarDateRangeCheckerTests: XCTestCase {
     date.year = 1000
     date.month = 2
     date.day = 13
+    date.hour = 0
+    date.minute = 0
+    date.second = 0
+    date.millisecond = 0
     
     let checker = SolarDateRangeChecker()
     let isValid = checker.isValidDate(solarDate: date)
