@@ -1,5 +1,5 @@
 //
-//  SolarDateRangeChecker.swift
+//  LunarDateRangeChecker.swift
 //  KoreanLunarConverter
 //
 //  Created by SwiftMan on 2022/12/07.
@@ -7,13 +7,17 @@
 
 import Foundation
 
-final class SolarDateRangeChecker {
-  func isValidDate(solarDate: Date) -> Bool {
+public final class LunarDateRangeChecker {
+  public init() {
+    
+  }
+  
+  public func isValidDate(lunarDate: Date) -> Bool {
     var minDate: Date {
       var date = Date()
       date.year = 1000
-      date.month = 2
-      date.day = 13
+      date.month = 1
+      date.day = 1
       date.hour = 0
       date.minute = 0
       date.second = 0
@@ -24,9 +28,9 @@ final class SolarDateRangeChecker {
     
     var maxDate: Date {
       var date = Date()
-      date.year = 2051
-      date.month = 1
-      date.day = 1
+      date.year = 2050
+      date.month = 11
+      date.day = 19
       date.hour = 0
       date.minute = 0
       date.second = 0
@@ -39,13 +43,15 @@ final class SolarDateRangeChecker {
       minDate ... maxDate
     }
     
-    let year = solarDate.year
-    let month = solarDate.month
-    let day = solarDate.day
+    let year = lunarDate.year
+    let month = lunarDate.month
+    let day = lunarDate.day
+
+    guard validRange.contains(lunarDate) else { return false }
     
-    guard validRange.contains(solarDate) else { return false }
-    
-    let dayLimit = KoreanSolarAlgorithm().solarDays(year: year, month: month)
+    let dayLimit = KoreanLunarAlgorithm().lunarDays(year: year,
+                                                    month: month,
+                                                    isIntercalation: true)
     
     return day <= dayLimit
   }

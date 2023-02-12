@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import KoreanLunarConverter
+import KoreanLunarSolarConverter
 
 final class SolarToLunarTests: XCTestCase {
   func testSolarToLunar_2022_12_16() {
