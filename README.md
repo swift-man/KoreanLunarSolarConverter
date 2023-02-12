@@ -1,7 +1,7 @@
-# KoreanLunarSolarConverter-Swift
+# KoreanLunarSolarConverter
 =================================
 
-한국 양음력 변환
+한국 양음력 변환 - Swift
 
 ![Badge](https://img.shields.io/badge/swift-white.svg?style=flat-square&logo=Swift)
 ![Badge - Version](https://img.shields.io/badge/Version-0.6.1-1177AA?style=flat-square)
