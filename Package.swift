@@ -5,6 +5,12 @@ import PackageDescription
 
 let package = Package(
     name: "KoreanLunarSolarConverter",
+    platforms: [
+      .iOS(.v11),
+      .macOS(.v11),
+      .tvOS(.v11),
+      .watchOS(.v4),
+    ],
     products: [
         .library(
             name: "KoreanLunarSolarConverter",
@@ -14,13 +20,9 @@ let package = Package(
     targets: [
         .target(
             name: "KoreanLunarSolarConverter",
-            dependencies: [],
-            path: "Sources/KoreanLunarSolarConverter",
-            exclude: ["Info.plist"]),
+            dependencies: []),
         .testTarget(
             name: "KoreanLunarSolarConverterTests",
-            dependencies: ["KoreanLunarSolarConverter"],
-            path: "Tests/KoreanLunarSolarConverterTests",
-            exclude: ["Info.plist"]),
+            dependencies: ["KoreanLunarSolarConverter"]),
     ]
 )

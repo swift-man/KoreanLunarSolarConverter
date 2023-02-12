@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import KoreanLunarConverter
+import KoreanLunarSolarConverter
 
 final class SolarDateRangeCheckerTests: XCTestCase {
   func testIsValidDate_2034_12_16() {
