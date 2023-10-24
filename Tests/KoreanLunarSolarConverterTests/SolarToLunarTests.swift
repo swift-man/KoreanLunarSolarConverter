@@ -26,8 +26,8 @@ final class SolarToLunarTests: XCTestCase {
     
     
     let formetter = KoreanLunarStringFormatter()
-    XCTAssertEqual("2022년 12월 4일(평달)", formetter.lunarDateString(fromSolar: solarDate))
-    XCTAssertEqual("임인(壬寅)년 계축(癸丑)월 계축(癸丑)일", formetter.lunarZodiac(fromSolar: solarDate))
+    XCTAssertEqual("2022년 12월 4일(평달)", try? formetter.lunarDateString(fromSolar: solarDate))
+    XCTAssertEqual("임인(壬寅)년 계축(癸丑)월 계축(癸丑)일", try? formetter.lunarZodiac(fromSolar: solarDate))
     XCTAssertEqual("임인(壬寅)년 계축(癸丑)월 계축(癸丑)일", formetter.lunarZodiac(fromLunar: target))
   }
   
@@ -48,8 +48,8 @@ final class SolarToLunarTests: XCTestCase {
     
     
     let formetter = KoreanLunarStringFormatter()
-    XCTAssertEqual("2017년 5월 6일(윤달)", formetter.lunarDateString(fromSolar: solarDate))
-    XCTAssertEqual("정유(丁酉)년 병오(丙午)월 정해(丁亥)일", formetter.lunarZodiac(fromSolar: solarDate))
+    XCTAssertEqual("2017년 5월 6일(윤달)", try? formetter.lunarDateString(fromSolar: solarDate))
+    XCTAssertEqual("정유(丁酉)년 병오(丙午)월 정해(丁亥)일", try? formetter.lunarZodiac(fromSolar: solarDate))
     XCTAssertEqual("정유(丁酉)년 병오(丙午)월 정해(丁亥)일", formetter.lunarZodiac(fromLunar: target))
   }
   
@@ -70,8 +70,8 @@ final class SolarToLunarTests: XCTestCase {
     
     
     let formetter = KoreanLunarStringFormatter()
-    XCTAssertEqual("1955년 3월 14일(윤달)", formetter.lunarDateString(fromSolar: solarDate))
-    XCTAssertEqual("을미(乙未)년 경진(庚辰)월 병인(丙寅)일", formetter.lunarZodiac(fromSolar: solarDate))
+    XCTAssertEqual("1955년 3월 14일(윤달)", try? formetter.lunarDateString(fromSolar: solarDate))
+    XCTAssertEqual("을미(乙未)년 경진(庚辰)월 병인(丙寅)일", try? formetter.lunarZodiac(fromSolar: solarDate))
     XCTAssertEqual("을미(乙未)년 경진(庚辰)월 병인(丙寅)일", formetter.lunarZodiac(fromLunar: target))
   }
   
@@ -92,8 +92,8 @@ final class SolarToLunarTests: XCTestCase {
     
     
     let formetter = KoreanLunarStringFormatter()
-    XCTAssertEqual("1985년 5월 23일(평달)", formetter.lunarDateString(fromSolar: solarDate))
-    XCTAssertEqual("을축(乙丑)년 임오(壬午)월 경술(庚戌)일", formetter.lunarZodiac(fromSolar: solarDate))
+    XCTAssertEqual("1985년 5월 23일(평달)", try? formetter.lunarDateString(fromSolar: solarDate))
+    XCTAssertEqual("을축(乙丑)년 임오(壬午)월 경술(庚戌)일", try? formetter.lunarZodiac(fromSolar: solarDate))
     XCTAssertEqual("을축(乙丑)년 임오(壬午)월 경술(庚戌)일", formetter.lunarZodiac(fromLunar: target))
   }
   
@@ -114,8 +114,8 @@ final class SolarToLunarTests: XCTestCase {
     
     
     let formetter = KoreanLunarStringFormatter()
-    XCTAssertEqual("1982년 8월 4일(평달)", formetter.lunarDateString(fromSolar: solarDate))
-    XCTAssertEqual("임술(壬戌)년 기유(己酉)월 병오(丙午)일", formetter.lunarZodiac(fromSolar: solarDate))
+    XCTAssertEqual("1982년 8월 4일(평달)", try? formetter.lunarDateString(fromSolar: solarDate))
+    XCTAssertEqual("임술(壬戌)년 기유(己酉)월 병오(丙午)일", try? formetter.lunarZodiac(fromSolar: solarDate))
     XCTAssertEqual("임술(壬戌)년 기유(己酉)월 병오(丙午)일", formetter.lunarZodiac(fromLunar: target))
   }
   
@@ -136,8 +136,8 @@ final class SolarToLunarTests: XCTestCase {
     
     
     let formetter = KoreanLunarStringFormatter()
-    XCTAssertEqual("2018년 8월 29일(평달)", formetter.lunarDateString(fromSolar: solarDate))
-    XCTAssertEqual("무술(戊戌)년 신유(辛酉)월 계유(癸酉)일", formetter.lunarZodiac(fromSolar: solarDate))
+    XCTAssertEqual("2018년 8월 29일(평달)", try? formetter.lunarDateString(fromSolar: solarDate))
+    XCTAssertEqual("무술(戊戌)년 신유(辛酉)월 계유(癸酉)일", try? formetter.lunarZodiac(fromSolar: solarDate))
     XCTAssertEqual("무술(戊戌)년 신유(辛酉)월 계유(癸酉)일", formetter.lunarZodiac(fromLunar: target))
   }
   
@@ -158,8 +158,8 @@ final class SolarToLunarTests: XCTestCase {
     
     
     let formetter = KoreanLunarStringFormatter()
-    XCTAssertEqual("2022년 12월 10일(평달)", formetter.lunarDateString(fromSolar: solarDate))
-    XCTAssertEqual("임인(壬寅)년 계축(癸丑)월 기미(己未)일", formetter.lunarZodiac(fromSolar: solarDate))
+    XCTAssertEqual("2022년 12월 10일(평달)", try? formetter.lunarDateString(fromSolar: solarDate))
+    XCTAssertEqual("임인(壬寅)년 계축(癸丑)월 기미(己未)일", try? formetter.lunarZodiac(fromSolar: solarDate))
     XCTAssertEqual("임인(壬寅)년 계축(癸丑)월 기미(己未)일", formetter.lunarZodiac(fromLunar: target))
   }
 }
