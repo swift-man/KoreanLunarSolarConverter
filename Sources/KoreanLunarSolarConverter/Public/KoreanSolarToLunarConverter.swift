@@ -7,16 +7,20 @@
 
 import Foundation
 
+/// A converter class for transforming solar dates to lunar dates in Korean context.
 public final class KoreanSolarToLunarConverter {
   private let dataSource = KoreanLunarDataSource()
   private let lunarAlgorithm = KoreanLunarAlgorithm()
   private let solarAlgorithm = KoreanSolarAlgorithm()
   private let solarDateRangeChecker = SolarDateRangeChecker()
   
-  public init() {
-    
-  }
+  /// Initializes a new instance of the converter.
+  public init() {}
 
+  /// Transforms a given solar date into its corresponding lunar date.
+  /// - Parameter solarDate: The solar date to be converted.
+  /// - Returns: The corresponding Korean lunar date.
+  /// - Throws: An error of type `KoreanLunarConvertError` if the solar date is not valid.
   public func lunarDate(fromSolar solarDate: Date) throws -> KoreanDate {
     guard solarDateRangeChecker.isValidDate(solarDate: solarDate)
     else { throw KoreanLunarConvertError.invalidDate }
@@ -26,6 +30,9 @@ public final class KoreanSolarToLunarConverter {
 }
 
 extension KoreanSolarToLunarConverter {
+  /// Internal function to perform the actual conversion from solar to lunar date.
+  /// - Parameter date: The solar date to be converted.
+  /// - Returns: The corresponding lunar date.
   private func lunarDate(fromSolarDate date: Date) -> KoreanDate {
     let solarYear = date.year
     let solarMonth = date.month
@@ -41,11 +48,12 @@ extension KoreanSolarToLunarConverter {
     var isIntercalation = false
     
     for month in stride(from: 12, through: 1, by: -1) {
-      let absDaysByMonth = lunarAlgorithm.lunarAbsDays(year: lunarYear,
+      let currentAbsDays = lunarAlgorithm.lunarAbsDays(year: lunarYear,
                                                        month: month,
                                                        day: 1,
                                                        isIntercalation: false)
-      if absDays >= absDaysByMonth {
+      
+      if absDays >= currentAbsDays {
         lunarMonth = month
         if dataSource.lunarIntercalationMonth(year: lunarYear) == month {
           isIntercalation = absDays >= lunarAlgorithm.lunarAbsDays(year: lunarYear,
@@ -61,7 +69,7 @@ extension KoreanSolarToLunarConverter {
         break
       }
     }
-
+    
     var lunarDate = Date()
     lunarDate.year = lunarYear
     lunarDate.month = lunarMonth
@@ -70,6 +78,11 @@ extension KoreanSolarToLunarConverter {
     return KoreanDate(date: lunarDate, isIntercalation: isIntercalation)
   }
   
+  /// Calculates the lunar year corresponding to a given solar year and its absolute days.
+  /// - Parameters:
+  ///   - solarYear: The solar year to be considered.
+  ///   - absDays: The absolute days of the solar date.
+  /// - Returns: The corresponding lunar year.
   private func calculateLunarYear(fromSolarYear solarYear: Int, absDays: Int) -> Int {
     if absDays >= lunarAlgorithm.lunarAbsDays(year: solarYear,
                                               month: 1,
