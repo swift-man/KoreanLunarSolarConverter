@@ -42,7 +42,7 @@ Gregorian calendar (1000-02-13 ~ 2050-12-31) <--> Korean lunar-calendar (1000-01
 
 ```
 dependencies: [
-    .package(url: "https://github.com/swift-man/KoreanLunarSolarConverter.git", .upToNextMajor(from: "0.6.2"))
+    .package(url: "https://github.com/swift-man/KoreanLunarSolarConverter.git", .upToNextMajor(from: "0.7.0"))
 ]
 ```
 
