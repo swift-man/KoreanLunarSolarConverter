@@ -10,6 +10,20 @@ import Foundation
 final class KoreanLunarDataSource {
   let lunarBaseYear = 1000
 
+  /// A struct containing arrays of ten stems and twelve branches in both Korean and Chinese.
+  struct ZodiacConstants {
+    let koreanTenStems = ["갑", "을", "병", "정", "무", "기", "경", "신", "임", "계"]
+    let koreanTwelveBranches = ["자", "축", "인", "묘", "진", "사", "오", "미", "신", "유", "술", "해"]
+    let chineseTenStems = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"]
+    let chineseTwelveBranches = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"]
+  }
+  
+  let zodiac = ZodiacConstants()
+  
+  /// 한국 음력 데이터 배열
+  ///
+  /// 배열의 데이터는 16진수 형태로 제공
+  /// 한국의 음력 날짜를 나타내는 데 사용
   let koreanLunarData = [
     0x82c60a57, 0x82fec52b, 0x82c40d2a, 0x82c60d55, 0xc30095ad, 0x82c4056a, 0x82c6096d, 0x830054dd, 0xc2c404ad, 0x82c40a4d,
     0x83002e4d, 0x82c40b26, 0xc300ab56, 0x82c60ad5, 0x82c4035a, 0x8300697a, 0xc2c6095b, 0x82c4049b, 0x83004a9b, 0x82c40a4b,
@@ -118,14 +132,26 @@ final class KoreanLunarDataSource {
     0xc2c60b6a, 0x82c6096d, 0x8300255b, 0x82c4049b, 0xc3007a57, 0x82c40a4b, 0x82c40b25, 0x83015b25, 0xc2c406d4, 0x82c60ada,
     0x830138b6]
   
+  /// 해당 연도의 음력 데이터를 반환합니다.
+  ///
+  /// - Parameter year: 조회하려는 연도입니다.
+  /// - Returns: 해당 연도의 음력 데이터를 반환합니다.
   func lunar(year: Int) -> Int {
     return koreanLunarData[year - lunarBaseYear]
   }
   
+  /// 음력 데이터에서 윤달 정보를 추출합니다.
+  ///
+  /// - Parameter lunar: 음력 데이터 값입니다.
+  /// - Returns: 윤달이 있는 달을 나타내는 숫자를 반환합니다. (없을 경우 0)
   func lunarIntercalationMonth(lunar: Int) -> Int {
     return (lunar >> 12) & 0x000F
   }
   
+  /// 해당 연도의 음력 데이터에서 윤달 정보를 추출합니다.
+  ///
+  /// - Parameter year: 조회하려는 연도입니다.
+  /// - Returns: 해당 연도의 음력 데이터에서 윤달이 있는 달을 나타내는 숫자를 반환합니다. (없을 경우 0)
   func lunarIntercalationMonth(year: Int) -> Int {
     return lunarIntercalationMonth(lunar: lunar(year: year))
   }
