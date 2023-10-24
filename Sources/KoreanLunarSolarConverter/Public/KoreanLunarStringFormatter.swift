@@ -7,135 +7,146 @@
 
 import Foundation
 
+/// A class to format Korean lunar date strings.
 public final class KoreanLunarStringFormatter {
-  private let koreanCheongan = ["갑", "을", "병", "정", "무", "기", "경", "신", "임", "계"]
-  private let koreanGanji = ["자", "축", "인", "묘", "진", "사", "오", "미", "신", "유", "술", "해"]
   
-  private let chineseCheongan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"]
-  private let chineseGanji = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"]
+  /// Enumeration for different zodiac types: year, month, day.
+  private enum ZodiacType {
+    case year, month, day
+  }
   
   private let dataSource = KoreanLunarDataSource()
   private let algorithm = KoreanLunarAlgorithm()
   private let converter = KoreanSolarToLunarConverter()
   
-  public init() {
-    
+  /// Initializes a new instance of KoreanLunarStringFormatter.
+  public init() { }
+  
+  /// Returns a formatted lunar date string from a given solar date.
+  /// - Parameter date: The solar date to be converted.
+  /// - Throws: An error if the conversion fails.
+  /// - Returns: A string representing the lunar date.
+  public func lunarDateString(fromSolar date: Date) throws -> String {
+    let lunarDate = try converter.lunarDate(fromSolar: date)
+    return "\(lunarDate.date.year)년 \(lunarDate.date.month)월 \(lunarDate.date.day)일" +
+    (lunarDate.isIntercalation ? "(윤달)" : "(평달)")
   }
   
-  public func lunarDateString(fromSolar date: Date) -> String? {
-    guard let lunarDate = try? converter.lunarDate(fromSolar: date)
-    else { return nil }
-    
-    let string = "\(lunarDate.date.year)년 \(lunarDate.date.month)월 \(lunarDate.date.day)일"
-    return lunarDate.isIntercalation ? string + "(윤달)" : string + "(평달)"
+  /// Returns a zodiac string from a given solar date.
+  /// - Parameter date: The solar date to be converted.
+  /// - Throws: An error if the conversion fails.
+  /// - Returns: A string representing the lunar zodiac.
+  public func lunarZodiac(fromSolar date: Date) throws -> String {
+    let lunarDate = try converter.lunarDate(fromSolar: date)
+    return constructZodiacString(from: lunarDate.date)
   }
   
-  public func lunarZodiac(fromSolar date: Date) -> String? {
-    guard let lunarDate = try? converter.lunarDate(fromSolar: date)
-    else { return nil }
-    
-    let yearFirstIndex = gapjaYearFirstIndex(from: lunarDate.date)
-    let yearLastIndex = gapjaYearLastIndex(from: lunarDate.date)
-    
-    let monthFirstIndex = gapjaMonthFirstIndex(from: lunarDate.date)
-    let monthLastIndex = gapjaMonthLastIndex(from: lunarDate.date)
-    
-    let dayFirstIndex = gapjaDayFirstIndex(from: lunarDate.date)
-    let dayLastIndex = gapjaDayLastIndex(from: lunarDate.date)
-    
-    let yearKR = yearKR(at: (first: yearFirstIndex, last: yearLastIndex))
-    let yearCH = yearCH(at: (first: yearFirstIndex, last: yearLastIndex))
-    let monthKR = monthKR(at: (first: monthFirstIndex, last: monthLastIndex))
-    let monthCH = monthCH(at: (first: monthFirstIndex, last: monthLastIndex))
-    let dayKR = dayKR(at: (first: dayFirstIndex, last: dayLastIndex))
-    let dayCH = dayCH(at: (first: dayFirstIndex, last: dayLastIndex))
-    return "\(yearKR)(\(yearCH))년 \(monthKR)(\(monthCH))월 \(dayKR)(\(dayCH))일"
-  }
-
+  /// Returns a zodiac string from a given lunar date.
+  /// - Parameter date: The lunar date.
+  /// - Returns: A string representing the lunar zodiac.
   public func lunarZodiac(fromLunar date: Date) -> String {
-    let yearFirstIndex = gapjaYearFirstIndex(from: date)
-    let yearLastIndex = gapjaYearLastIndex(from: date)
-    
-    let monthFirstIndex = gapjaMonthFirstIndex(from: date)
-    let monthLastIndex = gapjaMonthLastIndex(from: date)
-    
-    let dayFirstIndex = gapjaDayFirstIndex(from: date)
-    let dayLastIndex = gapjaDayLastIndex(from: date)
-    
-    let yearKR = yearKR(at: (first: yearFirstIndex, last: yearLastIndex))
-    let yearCH = yearCH(at: (first: yearFirstIndex, last: yearLastIndex))
-    let monthKR = monthKR(at: (first: monthFirstIndex, last: monthLastIndex))
-    let monthCH = monthCH(at: (first: monthFirstIndex, last: monthLastIndex))
-    let dayKR = dayKR(at: (first: dayFirstIndex, last: dayLastIndex))
-    let dayCH = dayCH(at: (first: dayFirstIndex, last: dayLastIndex))
-    return "\(yearKR)(\(yearCH))년 \(monthKR)(\(monthCH))월 \(dayKR)(\(dayCH))일"
+    return constructZodiacString(from: date)
+  }
+  
+  /// Constructs a zodiac string from a given date.
+  /// - Parameter date: The date to be used.
+  /// - Returns: A string representing the zodiac.
+  private func constructZodiacString(from date: Date) -> String {
+    let year = zodiac(from: date, type: .year)
+    let month = zodiac(from: date, type: .month)
+    let day = zodiac(from: date, type: .day)
+    return "\(year.KR)(\(year.CH))년 \(month.KR)(\(month.CH))월 \(day.KR)(\(day.CH))일"
+  }
+  
+  /// Returns the zodiac string for a given date and type.
+  /// - Parameters:
+  ///   - date: The date to be used.
+  ///   - type: The type of zodiac (year, month, day).
+  /// - Returns: A tuple containing Korean and Chinese zodiac strings.
+  private func zodiac(from date: Date, type: ZodiacType) -> (KR: String, CH: String) {
+    let (firstIndex, lastIndex) = zodiacIndexes(from: date, for: type)
+    let zodiac = dataSource.zodiac
+    return (KR: "\(zodiac.koreanTenStems[firstIndex])\(zodiac.koreanTwelveBranches[lastIndex])",
+            CH: "\(zodiac.chineseTenStems[firstIndex])\(zodiac.chineseTwelveBranches[lastIndex])")
   }
 }
 
 extension KoreanLunarStringFormatter {
-  private func gapjaYearFirstIndex(from date: Date) -> Int {
-    return ((date.year + 6) - dataSource.lunarBaseYear) % koreanCheongan.count
+  /// Retrieves zodiac indexes for a given date and type.
+  /// - Parameters:
+  ///   - date: The date to be used.
+  ///   - type: The type of zodiac (year, month, day).
+  /// - Returns: A tuple containing the first and last index for ten stems and twelve branches.
+  private func zodiacIndexes(from date: Date, for type: ZodiacType) -> (Int, Int) {
+    switch type {
+    case .year:
+      return (yearTenStemsIndex(from: date), yearTwelveBranchesIndex(from: date))
+    case .month:
+      let monthCount = monthCount(from: date)
+      return (monthTenStemsIndex(monthCount: monthCount), monthTwelveBranchesIndex(monthCount: monthCount))
+    case .day:
+      return (dayTenStemsIndex(from: date), dayTwelveBranchesIndex(from: date))
+    }
   }
   
-  private func gapjaYearLastIndex(from date: Date) -> Int {
-    return ((date.year + 0) - dataSource.lunarBaseYear) % koreanGanji.count
+  /// Computes the month count based on a given date.
+  /// - Parameter date: The date to be used.
+  /// - Returns: An integer representing the month count.
+  private func monthCount(from date: Date) -> Int {
+    return date.month + 12 * (date.year - dataSource.lunarBaseYear)
   }
   
-  private func gapjaMonthFirstIndex(from date: Date) -> Int {
-    var monthCount = date.month
-    monthCount += 12 * (date.year - dataSource.lunarBaseYear)
-    return (monthCount + 3) % koreanCheongan.count
+  /// Retrieves the ten stems index for a given year.
+  /// - Parameter date: The date whose year is to be used.
+  /// - Returns: An integer representing the ten stems index for the year.
+  private func yearTenStemsIndex(from date: Date) -> Int {
+    return (date.year + 6 - dataSource.lunarBaseYear) % dataSource.zodiac.koreanTenStems.count
   }
   
-  private func gapjaMonthLastIndex(from date: Date) -> Int {
-    var monthCount = date.month
-    monthCount += 12 * (date.year - dataSource.lunarBaseYear)
-    return (monthCount + 1) % koreanGanji.count
+  /// Retrieves the twelve branches index for a given year.
+  /// - Parameter date: The date whose year is to be used.
+  /// - Returns: An integer representing the twelve branches index for the year.
+  private func yearTwelveBranchesIndex(from date: Date) -> Int {
+    return (date.year - dataSource.lunarBaseYear) % dataSource.zodiac.koreanTwelveBranches.count
   }
   
-  private func gapjaDayFirstIndex(from date: Date) -> Int {
-    let absDays = algorithm.lunarAbsDays(year: date.year,
-                                         month: date.month,
-                                         day: date.day,
-                                         isIntercalation: true)
-    
-    guard absDays > 0 else { return 0 }
-    
-    return (absDays + 4) % koreanCheongan.count
+  /// Retrieves the ten stems index for a given month count.
+  /// - Parameter monthCount: The month count to be used.
+  /// - Returns: An integer representing the ten stems index for the month.
+  private func monthTenStemsIndex(monthCount: Int) -> Int {
+    return (monthCount + 3) % dataSource.zodiac.koreanTenStems.count
   }
   
-  private func gapjaDayLastIndex(from date: Date) -> Int {
-    let absDays = algorithm.lunarAbsDays(year: date.year,
-                                         month: date.month,
-                                         day: date.day,
-                                         isIntercalation: true)
-    
-    guard absDays > 0 else { return 0 }
-    
-    return (absDays + 2) % koreanGanji.count
+  /// Retrieves the twelve branches index for a given month count.
+  /// - Parameter monthCount: The month count to be used.
+  /// - Returns: An integer representing the twelve branches index for the month.
+  private func monthTwelveBranchesIndex(monthCount: Int) -> Int {
+    return (monthCount + 1) % dataSource.zodiac.koreanTwelveBranches.count
   }
   
-  private func yearKR(at indexes: (first: Int, last: Int)) -> String {
-    "\(koreanCheongan[indexes.first])\(koreanGanji[indexes.last])"
+  /// Retrieves the ten stems index for a given day.
+  /// - Parameter date: The date to be used.
+  /// - Returns: An integer representing the ten stems index for the day.
+  private func dayTenStemsIndex(from date: Date) -> Int {
+    let absDays = getAbsDays(from: date)
+    return (absDays + 4) % dataSource.zodiac.koreanTenStems.count
   }
   
-  private func yearCH(at indexes: (first: Int, last: Int)) -> String {
-    "\(chineseCheongan[indexes.first])\(chineseGanji[indexes.last])"
+  /// Retrieves the twelve branches index for a given day.
+  /// - Parameter date: The date to be used.
+  /// - Returns: An integer representing the twelve branches index for the day.
+  private func dayTwelveBranchesIndex(from date: Date) -> Int {
+    let absDays = getAbsDays(from: date)
+    return (absDays + 2) % dataSource.zodiac.koreanTwelveBranches.count
   }
   
-  private func monthKR(at indexes: (first: Int, last: Int)) -> String {
-    "\(koreanCheongan[indexes.first])\(koreanGanji[indexes.last])"
-  }
-  
-  private func monthCH(at indexes: (first: Int, last: Int)) -> String {
-    "\(chineseCheongan[indexes.first])\(chineseGanji[indexes.last])"
-  }
-  
-  private func dayKR(at indexes: (first: Int, last: Int)) -> String {
-    "\(koreanCheongan[indexes.first])\(koreanGanji[indexes.last])"
-  }
-  
-  private func dayCH(at indexes: (first: Int, last: Int)) -> String {
-    "\(chineseCheongan[indexes.first])\(chineseGanji[indexes.last])"
+  /// Computes the absolute days for a given date.
+  /// - Parameter date: The date to be used.
+  /// - Returns: An integer representing the absolute days.
+  private func getAbsDays(from date: Date) -> Int {
+    return algorithm.lunarAbsDays(year: date.year,
+                                  month: date.month,
+                                  day: date.day,
+                                  isIntercalation: true)
   }
 }
