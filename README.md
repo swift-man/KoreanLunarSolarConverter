@@ -4,10 +4,13 @@
 한국 양음력 변환 - Swift
 
 ![Badge](https://img.shields.io/badge/swift-white.svg?style=flat-square&logo=Swift)
-![Badge - Version](https://img.shields.io/badge/Version-0.6.1-1177AA?style=flat-square)
+![Badge - Version](https://img.shields.io/badge/Version-0.7.0-1177AA?style=flat-square)
 ![Badge - Swift Package Manager](https://img.shields.io/badge/SPM-compatible-orange?style=flat-square)
-![Badge - Platform](https://img.shields.io/badge/platform-mac|ios|watchos|tvos-yellow?style=flat-square)
 ![Badge - License](https://img.shields.io/badge/license-MIT-black?style=flat-square)
+![Badge - Platform](https://img.shields.io/badge/macOS-v11.0-yellow?style=flat-square)
+![Badge - Platform](https://img.shields.io/badge/iOS-v11.0-yellow?style=flat-square)
+![Badge - Platform](https://img.shields.io/badge/tvOS-v11.0-yellow?style=flat-square)
+![Badge - Platform](https://img.shields.io/badge/watchOS-v4.0-yellow?style=flat-square)
 
 changed start year to support conversion from 1391 to 1000  
 
