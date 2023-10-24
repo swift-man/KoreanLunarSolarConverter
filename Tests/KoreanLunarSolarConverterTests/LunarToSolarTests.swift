@@ -85,8 +85,8 @@ final class LunarToSolarTests: XCTestCase {
     XCTAssertTrue(convertedDate!.date === target)
     
     let formetter = KoreanLunarStringFormatter()
-    XCTAssertEqual("1727년 3월 1일(윤달)", formetter.lunarDateString(fromSolar: target))
-    XCTAssertEqual("정미(丁未)년 갑진(甲辰)월 정사(丁巳)일", formetter.lunarZodiac(fromSolar: target))
+    XCTAssertEqual("1727년 3월 1일(윤달)", try? formetter.lunarDateString(fromSolar: target))
+    XCTAssertEqual("정미(丁未)년 갑진(甲辰)월 정사(丁巳)일", try? formetter.lunarZodiac(fromSolar: target))
   }
   
   func testLunarToSolar_1959_05_28() {
@@ -105,8 +105,8 @@ final class LunarToSolarTests: XCTestCase {
     XCTAssertTrue(convertedDate!.date === target)
     
     let formetter = KoreanLunarStringFormatter()
-    XCTAssertEqual("1959년 5월 28일(평달)", formetter.lunarDateString(fromSolar: target))
-    XCTAssertEqual("기해(己亥)년 경오(庚午)월 병술(丙戌)일", formetter.lunarZodiac(fromSolar: target))
+    XCTAssertEqual("1959년 5월 28일(평달)", try? formetter.lunarDateString(fromSolar: target))
+    XCTAssertEqual("기해(己亥)년 경오(庚午)월 병술(丙戌)일", try? formetter.lunarZodiac(fromSolar: target))
   }
   
   func testLunarToSolar_1959_10_08() {
@@ -125,7 +125,7 @@ final class LunarToSolarTests: XCTestCase {
     XCTAssertTrue(convertedDate!.date === target)
     
     let formetter = KoreanLunarStringFormatter()
-    XCTAssertEqual("1959년 10월 8일(평달)", formetter.lunarDateString(fromSolar: target))
-    XCTAssertEqual("기해(己亥)년 을해(乙亥)월 갑오(甲午)일", formetter.lunarZodiac(fromSolar: target))
+    XCTAssertEqual("1959년 10월 8일(평달)", try? formetter.lunarDateString(fromSolar: target))
+    XCTAssertEqual("기해(己亥)년 을해(乙亥)월 갑오(甲午)일", try? formetter.lunarZodiac(fromSolar: target))
   }
 }
