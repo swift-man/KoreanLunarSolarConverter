@@ -1,0 +1,4 @@
+$(xcrun --find docc) process-archive \
+	transform-for-static-hosting ./KoreanLunarSolarConverter.doccarchive \
+	--output-path ./docs \
+	--hosting-base-path KoreanLunarSolarConverter

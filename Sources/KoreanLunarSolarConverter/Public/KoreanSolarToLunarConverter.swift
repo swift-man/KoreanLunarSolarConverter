@@ -12,12 +12,15 @@ public final class KoreanSolarToLunarConverter {
   private let dataSource = KoreanLunarDataSource()
   private let lunarAlgorithm = KoreanLunarAlgorithm()
   private let solarAlgorithm = KoreanSolarAlgorithm()
-  private let solarDateRangeChecker = SolarDateRangeChecker()
+  private let solarDateRangeChecker = KoreanSolarDateRangeChecker()
   
   /// Initializes a new instance of the converter.
   public init() {}
 
   /// Transforms a given solar date into its corresponding lunar date.
+  ///
+  /// 음력 변환은 1000년 01월 01일 부터 2050년 11월 18일까지 지원
+  /// 
   /// - Parameter solarDate: The solar date to be converted.
   /// - Returns: The corresponding Korean lunar date.
   /// - Throws: An error of type `KoreanLunarConvertError` if the solar date is not valid.
