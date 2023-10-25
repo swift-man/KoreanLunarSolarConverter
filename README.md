@@ -4,7 +4,7 @@
 한국 양음력 변환 - Swift
 
 ![Badge](https://img.shields.io/badge/swift-white.svg?style=flat-square&logo=Swift)
-![Badge - Version](https://img.shields.io/badge/Version-0.7.0-1177AA?style=flat-square)
+![Badge - Version](https://img.shields.io/badge/Version-0.7.1-1177AA?style=flat-square)
 ![Badge - Swift Package Manager](https://img.shields.io/badge/SPM-compatible-orange?style=flat-square)
 ![Badge - License](https://img.shields.io/badge/license-MIT-black?style=flat-square)
 ![Badge - Platform](https://img.shields.io/badge/macOS-v11.0-yellow?style=flat-square)
@@ -25,10 +25,6 @@ This follow the KARI(Korea Astronomy and Space Science Institute)
 
 한국 양음력 변환 ([한국천문연구원](https://astro.kasi.re.kr/life/pageView/8) 기준) - 네트워크 연결 불필요
 
-음력 변환은 1000년 01월 01일 부터 2050년 11월 18일까지 지원
-
-양력 변환은 1000년 02월 13일 부터 2050년 12월 31일까지 지원
-
 ```
 Gregorian calendar (1000-02-13 ~ 2050-12-31) <--> Korean lunar-calendar (1000-01-01 ~ 2050-11-18)
 ```
@@ -42,7 +38,7 @@ Gregorian calendar (1000-02-13 ~ 2050-12-31) <--> Korean lunar-calendar (1000-01
 
 ```
 dependencies: [
-    .package(url: "https://github.com/swift-man/KoreanLunarSolarConverter.git", .upToNextMajor(from: "0.6.2"))
+    .package(url: "https://github.com/swift-man/KoreanLunarSolarConverter.git", .upToNextMajor(from: "0.7.1"))
 ]
 ```
 
