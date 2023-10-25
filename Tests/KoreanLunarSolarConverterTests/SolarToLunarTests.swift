@@ -162,4 +162,85 @@ final class SolarToLunarTests: XCTestCase {
     XCTAssertEqual("임인(壬寅)년 계축(癸丑)월 기미(己未)일", try? formetter.lunarZodiac(fromSolar: solarDate))
     XCTAssertEqual("임인(壬寅)년 계축(癸丑)월 기미(己未)일", formetter.lunarZodiac(fromLunar: target))
   }
+  
+  func testSolarToLunar_2023_02_19() {
+    var solarDate = Date()
+    solarDate.year = 2023
+    solarDate.month = 2
+    solarDate.day = 19
+    
+    let converter = KoreanSolarToLunarConverter()
+    let convertedDate = try? converter.lunarDate(fromSolar: solarDate)
+
+    var target = Date()
+    target.year = 2023
+    target.month = 1
+    target.day = 29
+    XCTAssertTrue(convertedDate!.date === target)
+  }
+  
+  func testSolarToLunar_2023_03_21() {
+    var solarDate = Date()
+    solarDate.year = 2023
+    solarDate.month = 3
+    solarDate.day = 21
+    
+    let converter = KoreanSolarToLunarConverter()
+    let convertedDate = try? converter.lunarDate(fromSolar: solarDate)
+
+    var target = Date()
+    target.year = 2023
+    target.month = 2
+    target.day = 30
+    print("2.30 : \(target)")
+    XCTAssertTrue(convertedDate!.date === target)
+  }
+  
+  func testSolarToLunar_2023_04_20() {
+    var solarDate = Date()
+    solarDate.year = 2023
+    solarDate.month = 4
+    solarDate.day = 20
+    
+    let converter = KoreanSolarToLunarConverter()
+    let convertedDate = try? converter.lunarDate(fromSolar: solarDate)
+
+    var target = Date()
+    target.year = 2023
+    target.month = 3
+    target.day = 1
+    XCTAssertTrue(convertedDate!.date === target)
+  }
+  
+  func testSolarToLunar_2023_5_21() {
+    var solarDate = Date()
+    solarDate.year = 2023
+    solarDate.month = 5
+    solarDate.day = 21
+    
+    let converter = KoreanSolarToLunarConverter()
+    let convertedDate = try? converter.lunarDate(fromSolar: solarDate)
+
+    var target = Date()
+    target.year = 2023
+    target.month = 4
+    target.day = 2
+    XCTAssertTrue(convertedDate!.date === target)
+  }
+  
+  func testSolarToLunar_2024_01_20() {
+    var solarDate = Date()
+    solarDate.year = 2024
+    solarDate.month = 1
+    solarDate.day = 20
+    
+    let converter = KoreanSolarToLunarConverter()
+    let convertedDate = try? converter.lunarDate(fromSolar: solarDate)
+
+    var target = Date()
+    target.year = 2023
+    target.month = 12
+    target.day = 10
+    XCTAssertTrue(convertedDate!.date === target)
+  }
 }

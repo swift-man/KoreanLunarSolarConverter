@@ -9,13 +9,14 @@ import XCTest
 import KoreanLunarSolarConverter
 
 final class SolarDateRangeCheckerTests: XCTestCase {
+  let checker = KoreanSolarDateRangeChecker()
+  
   func testIsValidDate_2034_12_16() {
     var date = Date()
     date.year = 2034
     date.month = 12
     date.day = 26
     
-    let checker = SolarDateRangeChecker()
     let isValid = checker.isValidDate(solarDate: date)
     XCTAssertTrue(isValid)
   }
@@ -30,7 +31,6 @@ final class SolarDateRangeCheckerTests: XCTestCase {
     date.second = 0
     date.millisecond = 0
     
-    let checker = SolarDateRangeChecker()
     let isValid = checker.isValidDate(solarDate: date)
     XCTAssertTrue(isValid)
   }
@@ -41,7 +41,6 @@ final class SolarDateRangeCheckerTests: XCTestCase {
     date.month = 2
     date.day = 12
     
-    let checker = SolarDateRangeChecker()
     let isValid = checker.isValidDate(solarDate: date)
     XCTAssertFalse(isValid)
   }
@@ -52,7 +51,6 @@ final class SolarDateRangeCheckerTests: XCTestCase {
     date.month = 12
     date.day = 31
     
-    let checker = SolarDateRangeChecker()
     let isValid = checker.isValidDate(solarDate: date)
     XCTAssertTrue(isValid)
   }
@@ -63,7 +61,6 @@ final class SolarDateRangeCheckerTests: XCTestCase {
     date.month = 1
     date.day = 1
     
-    let checker = SolarDateRangeChecker()
     let isValid = checker.isValidDate(solarDate: date)
     XCTAssertFalse(isValid)
   }
