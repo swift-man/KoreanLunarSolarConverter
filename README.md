@@ -29,6 +29,9 @@ This follow the KARI(Korea Astronomy and Space Science Institute)
 Gregorian calendar (1000-02-13 ~ 2050-12-31) <--> Korean lunar-calendar (1000-01-01 ~ 2050-11-18)
 ```
 
+## Documentation
+[https://blog.slarea.com/KoreanLunarSolarConverter/documentation/koreanlunarsolarconverter](https://blog.slarea.com/KoreanLunarSolarConverter/documentation/koreanlunarsolarconverter/)
+
 ## Feature
 - [ ] KoreanLunarStringFormatter.lunarDateString(fromLunar:)
 - [ ] KoreanLunarStringFormatter.style `short`, `full` ...
