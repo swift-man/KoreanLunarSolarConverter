@@ -4,12 +4,12 @@
 한국 양음력 변환 - Swift
 
 ![Badge](https://img.shields.io/badge/swift-white.svg?style=flat-square&logo=Swift)
-![Badge - Version](https://img.shields.io/badge/Version-0.7.1-1177AA?style=flat-square)
+![Badge - Version](https://img.shields.io/badge/Version-0.7.2-1177AA?style=flat-square)
 ![Badge - Swift Package Manager](https://img.shields.io/badge/SPM-compatible-orange?style=flat-square)
 ![Badge - License](https://img.shields.io/badge/license-MIT-black?style=flat-square)
-![Badge - Platform](https://img.shields.io/badge/macOS-v11.0-yellow?style=flat-square)
-![Badge - Platform](https://img.shields.io/badge/iOS-v11.0-yellow?style=flat-square)
-![Badge - Platform](https://img.shields.io/badge/tvOS-v11.0-yellow?style=flat-square)
+![Badge - Platform](https://img.shields.io/badge/macOS-v12.0-yellow?style=flat-square)
+![Badge - Platform](https://img.shields.io/badge/iOS-v12.0-yellow?style=flat-square)
+![Badge - Platform](https://img.shields.io/badge/tvOS-v12.0-yellow?style=flat-square)
 ![Badge - Platform](https://img.shields.io/badge/watchOS-v4.0-yellow?style=flat-square)
 
 changed start year to support conversion from 1391 to 1000  
@@ -38,7 +38,7 @@ Gregorian calendar (1000-02-13 ~ 2050-12-31) <--> Korean lunar-calendar (1000-01
 
 ```
 dependencies: [
-    .package(url: "https://github.com/swift-man/KoreanLunarSolarConverter.git", .upToNextMajor(from: "0.7.1"))
+    .package(url: "https://github.com/swift-man/KoreanLunarSolarConverter.git", .branch("main"))
 ]
 ```
 

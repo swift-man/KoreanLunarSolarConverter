@@ -6,9 +6,9 @@ import PackageDescription
 let package = Package(
     name: "KoreanLunarSolarConverter",
     platforms: [
-      .iOS(.v11),
-      .macOS(.v11),
-      .tvOS(.v11),
+      .iOS(.v12),
+      .macOS(.v12),
+      .tvOS(.v12),
       .watchOS(.v4),
     ],
     products: [
