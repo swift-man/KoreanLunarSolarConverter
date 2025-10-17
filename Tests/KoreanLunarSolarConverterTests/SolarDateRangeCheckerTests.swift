@@ -21,9 +21,9 @@ final class SolarDateRangeCheckerTests: XCTestCase {
     XCTAssertTrue(isValid)
   }
   
-  func testIsValidMinDate() {
+  func testIsNotValidMinDate() {
     var date = Date()
-    date.year = 1000
+    date.year = 1949
     date.month = 2
     date.day = 13
     date.hour = 0
@@ -32,10 +32,10 @@ final class SolarDateRangeCheckerTests: XCTestCase {
     date.millisecond = 0
     
     let isValid = checker.isValidDate(solarDate: date)
-    XCTAssertTrue(isValid)
+    XCTAssertFalse(isValid)
   }
   
-  func testIsNotValidMinDate() {
+  func testIsNotValidMinDate2() {
     var date = Date()
     date.year = 1000
     date.month = 2

@@ -16,7 +16,7 @@ public final class KoreanSolarDateRangeChecker {
   /// Represents the minimum date that is considered valid for checking.
   private lazy var minDate: Date = {
     var date = Date()
-    date.year = 1000
+    date.year = 1950
     date.month = 2
     date.day = 13
     date.hour = 0

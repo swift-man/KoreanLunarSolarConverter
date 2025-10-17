@@ -12,7 +12,7 @@
 ![Badge - Platform](https://img.shields.io/badge/tvOS-v12.0-yellow?style=flat-square)
 ![Badge - Platform](https://img.shields.io/badge/watchOS-v4.0-yellow?style=flat-square)
 
-changed start year to support conversion from 1391 to 1000  
+changed start year to support conversion from 1950
 
 
 #### Overview
@@ -26,7 +26,7 @@ This follow the KARI(Korea Astronomy and Space Science Institute)
 한국 양음력 변환 ([한국천문연구원](https://astro.kasi.re.kr/life/pageView/8) 기준) - 네트워크 연결 불필요
 
 ```
-Gregorian calendar (1000-02-13 ~ 2050-12-31) <--> Korean lunar-calendar (1000-01-01 ~ 2050-11-18)
+Gregorian calendar (1950-02-13 ~ 2050-12-31) <--> Korean lunar-calendar (1950-01-01 ~ 2050-11-18)
 ```
 
 ## Documentation
