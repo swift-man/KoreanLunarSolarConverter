@@ -30,7 +30,7 @@ Gregorian calendar (1950-02-13 ~ 2050-12-31) <--> Korean lunar-calendar (1950-01
 ```
 
 ## Documentation
-[https://blog.slarea.com/KoreanLunarSolarConverter/documentation/koreanlunarsolarconverter](https://blog.slarea.com/KoreanLunarSolarConverter/documentation/koreanlunarsolarconverter/)
+[https://swift-man.github.io/KoreanLunarSolarConverter/documentation/koreanlunarsolarconverter](https://blog.slarea.com/KoreanLunarSolarConverter/documentation/koreanlunarsolarconverter/)
 
 ## Feature
 - [ ] KoreanLunarStringFormatter.lunarDateString(fromLunar:)
