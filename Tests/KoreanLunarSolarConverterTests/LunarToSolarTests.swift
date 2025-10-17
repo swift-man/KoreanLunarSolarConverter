@@ -80,7 +80,7 @@ final class LunarToSolarTests: XCTestCase {
 
     var target = Date()
     target.year = 1727
-    target.month = 4
+    target.month = 3
     target.day = 21
     XCTAssertTrue(convertedDate!.date === target)
     
@@ -127,5 +127,25 @@ final class LunarToSolarTests: XCTestCase {
     let formetter = KoreanLunarStringFormatter()
     XCTAssertEqual("1959년 10월 8일(평달)", try? formetter.lunarDateString(fromSolar: target))
     XCTAssertEqual("기해(己亥)년 을해(乙亥)월 갑오(甲午)일", try? formetter.lunarZodiac(fromSolar: target))
+  }
+
+  func testLunarToSolar_2020_04_08() {
+    var lunarDate = Date()
+    lunarDate.year = 2020
+    lunarDate.month = 4
+    lunarDate.day = 8
+
+    let converter = KoreanLunarToSolarConverter()
+    let convertedDate = try? converter.solarDate(fromLunar: lunarDate)
+
+    var target = Date()
+    target.year = 2020
+    target.month = 4
+    target.day = 30
+    XCTAssertTrue(convertedDate!.date === target)
+
+    let formetter = KoreanLunarStringFormatter()
+    XCTAssertEqual("2020년 4월 8일(평달)", try? formetter.lunarDateString(fromSolar: target))
+    XCTAssertEqual("경자(庚子)년 신사(辛巳)월 계유(癸酉)일", try? formetter.lunarZodiac(fromSolar: target))
   }
 }
