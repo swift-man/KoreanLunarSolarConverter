@@ -13,14 +13,14 @@ public final class KoreanLunarToSolarConverter {
   private let lunarAlgorithm = KoreanLunarAlgorithm()
   private let solarAlgorithm = KoreanSolarAlgorithm()
   private let lunarDateRangeChecker = KoreanLunarDateRangeChecker()
-  
+
   /// Default initializer.
   public init() {}
-  
+
   /// Converts a lunar date to a solar date.
   ///
   /// 양력 변환은 1000년 02월 13일 부터 2050년 12월 31일까지 지원
-  /// 
+  /// 그 해의 윤달 월과 같을 때 기본을 ‘평달()’로 간주합니다. 만약 윤달로 간주해야한다면 타 API 사용을 권장합니다.
   /// - Parameter lunarDate: The lunar date to convert.
   /// - Returns: A `KoreanDate` object containing the converted solar date.
   /// - Throws: An error if the conversion fails.
@@ -30,11 +30,16 @@ public final class KoreanLunarToSolarConverter {
     else {
       throw KoreanLunarConvertError.invalidDate
     }
-    
-    let isIntercalation = dataSource.lunarIntercalationMonth(year: lunarDate.year) == lunarDate.month
-    let date = try solarDate(fromLunarDate: lunarDate, isIntercalation: isIntercalation)
-    
-    return KoreanDate(date: date, isIntercalation: isIntercalation)
+
+    let leapMonth = dataSource.lunarIntercalationMonth(year: lunarDate.year)
+
+    if lunarDate.month == leapMonth {
+      let normal = try solarDate(fromLunarDate: lunarDate, isIntercalation: false)
+      return KoreanDate(date: normal, isIntercalation: false)
+    } else {
+      let date = try solarDate(fromLunarDate: lunarDate, isIntercalation: false)
+      return KoreanDate(date: date, isIntercalation: false)
+    }
   }
 }
 
@@ -50,10 +55,10 @@ extension KoreanLunarToSolarConverter {
                                               month: date.month,
                                               day: date.day,
                                               isIntercalation: isIntercalation)
-    
+
     let solarYear = calculateSolarYear(fromLunarYear: date.year, absDays: absDays)
     let (solarMonth, solarDay) = calculateSolarMonthAndDay(solarYear: solarYear, absDays: absDays)
-    
+
     guard
       !isRemovedDateInGregorian(solarYear: solarYear,
                                 solarMonth: solarMonth,
@@ -61,15 +66,15 @@ extension KoreanLunarToSolarConverter {
     else {
       throw KoreanLunarConvertError.removedGregorianDate
     }
-    
+
     var solarDate = Date()
     solarDate.year = solarYear
     solarDate.month = solarMonth
     solarDate.day = solarDay
-    
+
     return solarDate
   }
-  
+
   /// Calculates the solar year based on a given lunar year and absolute days.
   /// - Parameters:
   ///   - lunarYear: The lunar year to use for the calculation.
@@ -83,7 +88,7 @@ extension KoreanLunarToSolarConverter {
     }
     return lunarYear + 1
   }
-  
+
   /// Calculates the solar month and day based on a given solar year and absolute days.
   /// - Parameters:
   ///   - solarYear: The solar year to use for the calculation.
@@ -100,7 +105,7 @@ extension KoreanLunarToSolarConverter {
     }
     return (0, 0)
   }
-  
+
   /// Checks if a given solar year, month, and day corresponds to a date removed in the Gregorian calendar.
   /// - Parameters:
   ///   - solarYear: The solar year to check.
