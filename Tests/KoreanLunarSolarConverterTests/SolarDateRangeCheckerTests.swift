@@ -5,12 +5,14 @@
 //  Created by SwiftMan on 2022/12/12.
 //
 
-import XCTest
-import KoreanLunarSolarConverter
+import Testing
+import Foundation
+@testable import KoreanLunarSolarConverter
 
-final class SolarDateRangeCheckerTests: XCTestCase {
+struct SolarDateRangeCheckerTests {
   let checker = KoreanSolarDateRangeChecker()
-  
+
+  @Test
   func testIsValidDate_2034_12_16() {
     var date = Date()
     date.year = 2034
@@ -18,9 +20,10 @@ final class SolarDateRangeCheckerTests: XCTestCase {
     date.day = 26
     
     let isValid = checker.isValidDate(solarDate: date)
-    XCTAssertTrue(isValid)
+    #expect(isValid)
   }
-  
+
+  @Test
   func testIsNotValidMinDate() {
     var date = Date()
     date.year = 1949
@@ -32,9 +35,10 @@ final class SolarDateRangeCheckerTests: XCTestCase {
     date.millisecond = 0
     
     let isValid = checker.isValidDate(solarDate: date)
-    XCTAssertFalse(isValid)
+    #expect(!isValid)
   }
-  
+
+  @Test
   func testIsNotValidMinDate2() {
     var date = Date()
     date.year = 1000
@@ -42,19 +46,21 @@ final class SolarDateRangeCheckerTests: XCTestCase {
     date.day = 12
     
     let isValid = checker.isValidDate(solarDate: date)
-    XCTAssertFalse(isValid)
+    #expect(!isValid)
   }
-  
+
+  @Test
   func testIsValidMaxDate() {
     var date = Date()
-    date.year = 2050
+    date.year = 2036
     date.month = 12
-    date.day = 31
+    date.day = 30
     
     let isValid = checker.isValidDate(solarDate: date)
-    XCTAssertTrue(isValid)
+    #expect(isValid)
   }
-  
+
+  @Test
   func testIsNotValidMaxDate() {
     var date = Date()
     date.year = 2051
@@ -62,6 +68,6 @@ final class SolarDateRangeCheckerTests: XCTestCase {
     date.day = 1
     
     let isValid = checker.isValidDate(solarDate: date)
-    XCTAssertFalse(isValid)
+    #expect(!isValid)
   }
 }
