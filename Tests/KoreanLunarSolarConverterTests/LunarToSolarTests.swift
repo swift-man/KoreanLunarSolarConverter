@@ -149,4 +149,256 @@ struct LunarToSolarTests {
       output: target
     )
   }
+
+  @Test("공휴일 테스트 - 2020 윤년 - 설")
+  func testSolarToLunar_2019_12_30() {
+    var solarDate = Date()
+    solarDate.year = 2019
+    solarDate.month = 12
+    solarDate.day = 30
+
+    var target = Date()
+    target.year = 2020
+    target.month = 1
+    target.day = 24
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2020 윤년 - 설")
+  func testSolarToLunar_2020_01_1() {
+    var solarDate = Date()
+    solarDate.year = 2020
+    solarDate.month = 1
+    solarDate.day = 1
+
+    var target = Date()
+    target.year = 2020
+    target.month = 1
+    target.day = 25
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2020 윤년 - 설")
+  func testSolarToLunar_2020_01_02() {
+    var solarDate = Date()
+    solarDate.year = 2020
+    solarDate.month = 1
+    solarDate.day = 2
+
+    var target = Date()
+    target.year = 2020
+    target.month = 1
+    target.day = 26
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2020 윤년 - 부처님 오신날")
+  func testSolarToLunar_2020_04_08() {
+    var solarDate = Date()
+    solarDate.year = 2020
+    solarDate.month = 4
+    solarDate.day = 8
+
+    var target = Date()
+    target.year = 2020
+    target.month = 4
+    target.day = 30
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2020 윤년 - 추석")
+  func testSolarToLunar_2020_08_14() {
+    var solarDate = Date()
+    solarDate.year = 2020
+    solarDate.month = 8
+    solarDate.day = 14
+
+    var target = Date()
+    target.year = 2020
+    target.month = 9
+    target.day = 30
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2020 윤년 - 추석")
+  func testSolarToLunar_2020_08_15() {
+    var solarDate = Date()
+    solarDate.year = 2020
+    solarDate.month = 8
+    solarDate.day = 15
+
+    var target = Date()
+    target.year = 2020
+    target.month = 10
+    target.day = 1
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2020 윤년 - 추석")
+  func testSolarToLunar_2020_08_16() {
+    var solarDate = Date()
+    solarDate.year = 2020
+    solarDate.month = 8
+    solarDate.day = 16
+
+    var target = Date()
+    target.year = 2020
+    target.month = 10
+    target.day = 2
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2021 평년 - 설")
+  func testSolarToLunar_2020_12_29() {
+    var solarDate = Date()
+    solarDate.year = 2020
+    solarDate.month = 12
+    solarDate.day = 30
+
+    var target = Date()
+    target.year = 2021
+    target.month = 2
+    target.day = 11
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2021 평년 - 설")
+  func testSolarToLunar_2021_01_01() {
+    var solarDate = Date()
+    solarDate.year = 2021
+    solarDate.month = 1
+    solarDate.day = 1
+
+    var target = Date()
+    target.year = 2021
+    target.month = 2
+    target.day = 12
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2021 평년 - 설")
+  func testSolarToLunar_2021_01_02() {
+    var solarDate = Date()
+    solarDate.year = 2021
+    solarDate.month = 1
+    solarDate.day = 2
+
+    var target = Date()
+    target.year = 2021
+    target.month = 2
+    target.day = 13
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2021 평년 - 부처님 오신날")
+  func testSolarToLunar_2021_04_08() {
+    var solarDate = Date()
+    solarDate.year = 2021
+    solarDate.month = 4
+    solarDate.day = 8
+
+    var target = Date()
+    target.year = 2021
+    target.month = 5
+    target.day = 19
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2021 평년 - 추석")
+  func testSolarToLunar_2021_08_14() {
+    var solarDate = Date()
+    solarDate.year = 2021
+    solarDate.month = 8
+    solarDate.day = 14
+
+    var target = Date()
+    target.year = 2021
+    target.month = 9
+    target.day = 20
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2021 평년 - 추석")
+  func testSolarToLunar_2021_08_15() {
+    var solarDate = Date()
+    solarDate.year = 2021
+    solarDate.month = 8
+    solarDate.day = 15
+
+    var target = Date()
+    target.year = 2021
+    target.month = 9
+    target.day = 21
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2021 평년 - 추석")
+  func testSolarToLunar_2021_08_16() {
+    var solarDate = Date()
+    solarDate.year = 2021
+    solarDate.month = 8
+    solarDate.day = 16
+
+    var target = Date()
+    target.year = 2021
+    target.month = 9
+    target.day = 22
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
 }
