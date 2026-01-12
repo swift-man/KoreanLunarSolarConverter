@@ -43,16 +43,16 @@ struct LunarToSolarTests {
   }
 
   @Test
-  func testLunarToSolar_2014_06_24() {
+  func testLunarToSolar_2024_06_24() {
     var lunarDate = Date()
-    lunarDate.year = 2014
+    lunarDate.year = 2024
     lunarDate.month = 6
     lunarDate.day = 24
 
     var target = Date()
-    target.year = 2014
+    target.year = 2024
     target.month = 7
-    target.day = 20
+    target.day = 29
 
     expect(
       input: lunarDate,
