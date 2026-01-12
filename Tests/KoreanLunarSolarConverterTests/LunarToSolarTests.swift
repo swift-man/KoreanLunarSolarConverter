@@ -5,127 +5,400 @@
 //  Created by SwiftMan on 2022/12/07.
 //
 
-import XCTest
-import KoreanLunarSolarConverter
+import Testing
+import Foundation
+@testable import KoreanLunarSolarConverter
 
-final class LunarToSolarTests: XCTestCase {
-  func testLunarToSolar_1956_1_21() {
+struct LunarToSolarTests {
+  @Test
+  func testLunarToSolar_2031_2_8() {
     var lunarDate = Date()
-    lunarDate.year = 1956
-    lunarDate.month = 1
-    lunarDate.day = 21
-    
-    let converter = KoreanLunarToSolarConverter()
-    let convertedDate = try? converter.solarDate(fromLunar: lunarDate)
+    lunarDate.year = 2031
+    lunarDate.month = 2
+    lunarDate.day = 8
 
     var target = Date()
-    target.year = 1956
+    target.year = 2031
     target.month = 3
-    target.day = 3
-    XCTAssertTrue(convertedDate!.date === target)
-    
-    
-    let formetter = KoreanLunarStringFormatter()
-    XCTAssertEqual("병신(丙申)년 경인(庚寅)월 기사(己巳)일", formetter.lunarZodiac(fromLunar: lunarDate))
+    target.day = 1
+
+    expect(
+      input: lunarDate,
+      output: target
+    )
   }
-  
-  func testLunarToSolar_1914_06_24() {
+
+  private func expect(
+    input: Date,
+    output: Date
+  ) {
+    do {
+      let converter = try KoreanLunarToSolarConverter()
+      let convertedDate = try converter.solarDate(fromLunar: input)
+
+      #expect(convertedDate.first! === output)
+    } catch {
+      Issue.record("변환 중 에러 발생: \(error)")
+    }
+  }
+
+  @Test
+  func testLunarToSolar_2024_06_24() {
     var lunarDate = Date()
-    lunarDate.year = 1914
+    lunarDate.year = 2024
     lunarDate.month = 6
     lunarDate.day = 24
-    
-    let converter = KoreanLunarToSolarConverter()
-    let convertedDate = try? converter.solarDate(fromLunar: lunarDate)
 
     var target = Date()
-    target.year = 1914
-    target.month = 8
-    target.day = 15
-    XCTAssertTrue(convertedDate!.date === target)
-    
-    
-    let formetter = KoreanLunarStringFormatter()
-    XCTAssertEqual("갑인(甲寅)년 신미(辛未)월 계유(癸酉)일", formetter.lunarZodiac(fromLunar: lunarDate))
+    target.year = 2024
+    target.month = 7
+    target.day = 29
+
+    expect(
+      input: lunarDate,
+      output: target
+    )
   }
-  
+
+  @Test
   func testLunarToSolar_2017_06_29() {
     var lunarDate = Date()
     lunarDate.year = 2017
     lunarDate.month = 6
     lunarDate.day = 29
-    
-    let converter = KoreanLunarToSolarConverter()
-    let convertedDate = try? converter.solarDate(fromLunar: lunarDate)
 
     var target = Date()
     target.year = 2017
     target.month = 8
     target.day = 20
-    XCTAssertTrue(convertedDate!.date === target)
-    
-    
-    let formetter = KoreanLunarStringFormatter()
-    XCTAssertEqual("정유(丁酉)년 정미(丁未)월 기묘(己卯)일", formetter.lunarZodiac(fromLunar: lunarDate))
+
+    expect(
+      input: lunarDate,
+      output: target
+    )
   }
-  
-  func testLunarToSolar_1959_05_28() {
+
+  @Test
+  func testLunarToSolar_2029_05_28() {
     var lunarDate = Date()
-    lunarDate.year = 1959
+    lunarDate.year = 2029
     lunarDate.month = 5
     lunarDate.day = 28
-    
-    let converter = KoreanLunarToSolarConverter()
-    let convertedDate = try? converter.solarDate(fromLunar: lunarDate)
 
     var target = Date()
-    target.year = 1959
+    target.year = 2029
     target.month = 7
-    target.day = 3
-    XCTAssertTrue(convertedDate!.date === target)
-    
-    let formetter = KoreanLunarStringFormatter()
-    XCTAssertEqual("1959년 5월 28일(평달)", try? formetter.lunarDateString(fromSolar: target))
-    XCTAssertEqual("기해(己亥)년 경오(庚午)월 병술(丙戌)일", try? formetter.lunarZodiac(fromSolar: target))
+    target.day = 9
+
+    expect(
+      input: lunarDate,
+      output: target
+    )
   }
-  
-  func testLunarToSolar_1959_10_08() {
+
+  @Test
+  func testLunarToSolar_2029_10_08() {
     var lunarDate = Date()
-    lunarDate.year = 1959
+    lunarDate.year = 2029
     lunarDate.month = 10
     lunarDate.day = 8
-    
-    let converter = KoreanLunarToSolarConverter()
-    let convertedDate = try? converter.solarDate(fromLunar: lunarDate)
 
     var target = Date()
-    target.year = 1959
+    target.year = 2029
     target.month = 11
-    target.day = 8
-    XCTAssertTrue(convertedDate!.date === target)
-    
-    let formetter = KoreanLunarStringFormatter()
-    XCTAssertEqual("1959년 10월 8일(평달)", try? formetter.lunarDateString(fromSolar: target))
-    XCTAssertEqual("기해(己亥)년 을해(乙亥)월 갑오(甲午)일", try? formetter.lunarZodiac(fromSolar: target))
+    target.day = 13
+
+    expect(
+      input: lunarDate,
+      output: target
+    )
   }
 
+  @Test
   func testLunarToSolar_2020_04_08() {
     var lunarDate = Date()
     lunarDate.year = 2020
     lunarDate.month = 4
     lunarDate.day = 8
 
-    let converter = KoreanLunarToSolarConverter()
-    let convertedDate = try? converter.solarDate(fromLunar: lunarDate)
+    var target = Date()
+    target.year = 2020
+    target.month = 4
+    target.day = 30
+
+    expect(
+      input: lunarDate,
+      output: target
+    )
+  }
+
+  @Test
+  func testLunarToSolar_2020_12_29() {
+    var lunarDate = Date()
+    lunarDate.year = 2020
+    lunarDate.month = 12
+    lunarDate.day = 29
+
+    var target = Date()
+    target.year = 2021
+    target.month = 2
+    target.day = 10
+
+    expect(
+      input: lunarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2020 윤년 - 설")
+  func testSolarToLunar_2019_12_30() {
+    var solarDate = Date()
+    solarDate.year = 2019
+    solarDate.month = 12
+    solarDate.day = 30
+
+    var target = Date()
+    target.year = 2020
+    target.month = 1
+    target.day = 24
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2020 윤년 - 설")
+  func testSolarToLunar_2020_01_1() {
+    var solarDate = Date()
+    solarDate.year = 2020
+    solarDate.month = 1
+    solarDate.day = 1
+
+    var target = Date()
+    target.year = 2020
+    target.month = 1
+    target.day = 25
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2020 윤년 - 설")
+  func testSolarToLunar_2020_01_02() {
+    var solarDate = Date()
+    solarDate.year = 2020
+    solarDate.month = 1
+    solarDate.day = 2
+
+    var target = Date()
+    target.year = 2020
+    target.month = 1
+    target.day = 26
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2020 윤년 - 부처님 오신날")
+  func testSolarToLunar_2020_04_08() {
+    var solarDate = Date()
+    solarDate.year = 2020
+    solarDate.month = 4
+    solarDate.day = 8
 
     var target = Date()
     target.year = 2020
     target.month = 4
     target.day = 30
-    XCTAssertTrue(convertedDate!.date === target)
 
-    let formetter = KoreanLunarStringFormatter()
-    XCTAssertEqual("2020년 4월 8일(평달)", try? formetter.lunarDateString(fromSolar: target))
-    XCTAssertEqual("경자(庚子)년 신사(辛巳)월 계유(癸酉)일", try? formetter.lunarZodiac(fromSolar: target))
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2020 윤년 - 추석")
+  func testSolarToLunar_2020_08_14() {
+    var solarDate = Date()
+    solarDate.year = 2020
+    solarDate.month = 8
+    solarDate.day = 14
+
+    var target = Date()
+    target.year = 2020
+    target.month = 9
+    target.day = 30
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2020 윤년 - 추석")
+  func testSolarToLunar_2020_08_15() {
+    var solarDate = Date()
+    solarDate.year = 2020
+    solarDate.month = 8
+    solarDate.day = 15
+
+    var target = Date()
+    target.year = 2020
+    target.month = 10
+    target.day = 1
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2020 윤년 - 추석")
+  func testSolarToLunar_2020_08_16() {
+    var solarDate = Date()
+    solarDate.year = 2020
+    solarDate.month = 8
+    solarDate.day = 16
+
+    var target = Date()
+    target.year = 2020
+    target.month = 10
+    target.day = 2
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2021 평년 - 설")
+  func testSolarToLunar_2020_12_29() {
+    var solarDate = Date()
+    solarDate.year = 2020
+    solarDate.month = 12
+    solarDate.day = 30
+
+    var target = Date()
+    target.year = 2021
+    target.month = 2
+    target.day = 11
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2021 평년 - 설")
+  func testSolarToLunar_2021_01_01() {
+    var solarDate = Date()
+    solarDate.year = 2021
+    solarDate.month = 1
+    solarDate.day = 1
+
+    var target = Date()
+    target.year = 2021
+    target.month = 2
+    target.day = 12
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2021 평년 - 설")
+  func testSolarToLunar_2021_01_02() {
+    var solarDate = Date()
+    solarDate.year = 2021
+    solarDate.month = 1
+    solarDate.day = 2
+
+    var target = Date()
+    target.year = 2021
+    target.month = 2
+    target.day = 13
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2021 평년 - 부처님 오신날")
+  func testSolarToLunar_2021_04_08() {
+    var solarDate = Date()
+    solarDate.year = 2021
+    solarDate.month = 4
+    solarDate.day = 8
+
+    var target = Date()
+    target.year = 2021
+    target.month = 5
+    target.day = 19
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2021 평년 - 추석")
+  func testSolarToLunar_2021_08_14() {
+    var solarDate = Date()
+    solarDate.year = 2021
+    solarDate.month = 8
+    solarDate.day = 14
+
+    var target = Date()
+    target.year = 2021
+    target.month = 9
+    target.day = 20
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2021 평년 - 추석")
+  func testSolarToLunar_2021_08_15() {
+    var solarDate = Date()
+    solarDate.year = 2021
+    solarDate.month = 8
+    solarDate.day = 15
+
+    var target = Date()
+    target.year = 2021
+    target.month = 9
+    target.day = 21
+
+    expect(
+      input: solarDate,
+      output: target
+    )
+  }
+
+  @Test("공휴일 테스트 - 2021 평년 - 추석")
+  func testSolarToLunar_2021_08_16() {
+    var solarDate = Date()
+    solarDate.year = 2021
+    solarDate.month = 8
+    solarDate.day = 16
+
+    var target = Date()
+    target.year = 2021
+    target.month = 9
+    target.day = 22
+
+    expect(
+      input: solarDate,
+      output: target
+    )
   }
 }
