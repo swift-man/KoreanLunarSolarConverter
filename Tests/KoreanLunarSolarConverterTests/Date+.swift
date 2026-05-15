@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KoreanLunarSolarConverter
 
 extension Date {
   static func === (lhs: Self, rhs: Self) -> Bool {
@@ -207,5 +208,13 @@ extension Date {
         self = date
       }
     }
+  }
+}
+
+extension Date {
+  static func == (lhs: Self, rhs: LunarDate) -> Bool {
+    lhs.year == rhs.year &&
+    lhs.month == rhs.month &&
+    lhs.day == rhs.day
   }
 }

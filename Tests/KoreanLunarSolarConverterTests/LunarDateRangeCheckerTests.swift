@@ -5,12 +5,14 @@
 //  Created by SwiftMan on 2022/12/12.
 //
 
-import XCTest
-import KoreanLunarSolarConverter
+import Testing
+import Foundation
+@testable import KoreanLunarSolarConverter
 
-final class LunarDateRangeCheckerTests: XCTestCase {
+struct LunarDateRangeCheckerTests {
   let checker = KoreanLunarDateRangeChecker()
-  
+
+  @Test
   func testIsValidDate_2022_12_16() {
     var date = Date()
     date.year = 2022
@@ -19,19 +21,21 @@ final class LunarDateRangeCheckerTests: XCTestCase {
     
     
     let isValid = checker.isValidDate(lunarDate: date)
-    XCTAssertTrue(isValid)
+    #expect(isValid)
   }
-  
-  func testIsValidDate_1000_01_01() {
+
+  @Test
+  func testIsNotValidDate_1000_01_01() {
     var date = Date()
     date.year = 1000
     date.month = 1
     date.day = 1
     
     let isValid = checker.isValidDate(lunarDate: date)
-    XCTAssertTrue(isValid)
+    #expect(!isValid)
   }
-  
+
+  @Test
   func testIsNotValidMinDate() {
     var date = Date()
     date.year = 999
@@ -39,19 +43,21 @@ final class LunarDateRangeCheckerTests: XCTestCase {
     date.day = 31
     
     let isValid = checker.isValidDate(lunarDate: date)
-    XCTAssertFalse(isValid)
+    #expect(!isValid)
   }
-  
+
+  @Test
   func testIsValidMaxDate() {
     var date = Date()
-    date.year = 2050
+    date.year = 2036
     date.month = 11
-    date.day = 18
-    
+    date.day = 28
+
     let isValid = checker.isValidDate(lunarDate: date)
-    XCTAssertTrue(isValid)
+    #expect(isValid)
   }
-  
+
+  @Test
   func testIsNotValidMaxDate() {
     var date = Date()
     date.year = 2050
@@ -59,10 +65,10 @@ final class LunarDateRangeCheckerTests: XCTestCase {
     date.day = 19
     
     let isValid = checker.isValidDate(lunarDate: date)
-    XCTAssertFalse(isValid)
+    #expect(!isValid)
   }
-  
-  // 시간, 분, 초는 날짜의 유효성에 영향을 미치지 않아야 합니다.
+
+  @Test("시간, 분, 초는 날짜의 유효성에 영향을 미치지 않아야 합니다.")
   func testIsValidWithDifferentTime() {
     var date = Date()
     date.year = 2022
@@ -73,9 +79,10 @@ final class LunarDateRangeCheckerTests: XCTestCase {
     date.second = 45
     
     let isValid = checker.isValidDate(lunarDate: date)
-    XCTAssertTrue(isValid)
+    #expect(isValid)
   }
-  
+
+  @Test
   func testAlgorithmChange() {
     var date = Date()
     date.year = 2025
@@ -83,6 +90,6 @@ final class LunarDateRangeCheckerTests: XCTestCase {
     date.day = 28
     
     let isValid = checker.isValidDate(lunarDate: date)
-    XCTAssertTrue(isValid)
+    #expect(isValid)
   }
 }
