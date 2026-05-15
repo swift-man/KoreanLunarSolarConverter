@@ -48,16 +48,14 @@ fi
 
 HOSTING_BASE_PATH="/${HOSTING_BASE_PATH#/}"
 export HOSTING_BASE_PATH
-perl -0pi -e '
+find "$DOCS_OUTPUT_PATH" -type f -name '*.html' \
+  -exec perl -0pi -e '
   my $base = $ENV{"HOSTING_BASE_PATH"};
   s#href="/favicon\.ico"#href="$base/favicon.ico"#g;
   s#href="/favicon\.svg"#href="$base/favicon.svg"#g;
   s#var baseUrl = "/"#var baseUrl = "$base/"#g;
   s#src="/js/#src="$base/js/#g;
   s#href="/css/#href="$base/css/#g;
-' "$DOCS_OUTPUT_PATH/index.html"
-
-find "$DOCS_OUTPUT_PATH" -type f -name '*.js' \
-  -exec perl -0pi -e 's/[ \t]+$//mg' {} +
+' {} +
 
 rm -rf "$DOCC_ARCHIVE_PATH" "$SYMBOL_GRAPH_PATH"

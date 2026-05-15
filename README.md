@@ -12,9 +12,6 @@
 ![Badge - Platform](https://img.shields.io/badge/tvOS-v12.0-yellow?style=flat-square)
 ![Badge - Platform](https://img.shields.io/badge/watchOS-v4.0-yellow?style=flat-square)
 
-changed start year to support conversion from 1950
-
-
 #### Overview
 
 Here is a library to convert Korean lunar-calendar to Gregorian calendar.
