@@ -1,0 +1,64 @@
+version: 1
+
+review:
+  include:
+    - "**/*.swift"
+    - "Package.swift"
+    - "Project.swift"
+    - "Tuist/**/*.swift"
+    - "**/Info.plist"
+    - "README.md"
+    - "GeneratingDocumentationSite"
+
+  exclude:
+    # dependency / build output
+    - "Pods/**"
+    - "Carthage/**"
+    - ".build/**"
+    - "DerivedData/**"
+    - "build/**"
+    - "dist/**"
+    - "node_modules/**"
+    - "vendor/**"
+    - ".swiftpm/xcode/**"
+
+    # generated files
+    - "**/Generated/**"
+    - "**/*.generated.swift"
+    - "**/*.pb.swift"
+    - "**/*.graphql.swift"
+    - "**/*+Generated.swift"
+
+    # resources
+    - "**/*.xcassets/**"
+    - "**/*.png"
+    - "**/*.jpg"
+    - "**/*.jpeg"
+    - "**/*.gif"
+    - "**/*.webp"
+    - "**/*.pdf"
+    - "**/*.mp4"
+    - "**/*.mov"
+
+    # lock files
+    - "Package.resolved"
+    - "Podfile.lock"
+    - "package-lock.json"
+    - "yarn.lock"
+    - "pnpm-lock.yaml"
+
+    # docs / generated DocC output
+    - "CHANGELOG.md"
+    - "docs/**"
+    - "KoreanLunarSolarConverter.doccarchive/**"
+    - "**/*.doccarchive/**"
+    - "**/*.docc/**"
+
+  always_review:
+    - ".reviewbot.yml"
+    - "AGENTS.md"
+    - "README.md"
+    - "GeneratingDocumentationSite"
+    - "Package.swift"
+    - "Project.swift"
+    - "Tuist/**/*.swift"

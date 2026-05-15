@@ -4,7 +4,7 @@
 한국 양음력 변환 - Swift
 
 ![Badge](https://img.shields.io/badge/swift-white.svg?style=flat-square&logo=Swift)
-![Badge - Version](https://img.shields.io/badge/Version-0.7.2-1177AA?style=flat-square)
+![Badge - Version](https://img.shields.io/badge/Version-0.9.1-1177AA?style=flat-square)
 ![Badge - Swift Package Manager](https://img.shields.io/badge/SPM-compatible-orange?style=flat-square)
 ![Badge - License](https://img.shields.io/badge/license-MIT-black?style=flat-square)
 ![Badge - Platform](https://img.shields.io/badge/macOS-v12.0-yellow?style=flat-square)
@@ -30,7 +30,7 @@ Gregorian calendar (1000-02-13 ~ 2050-12-31) <--> Korean lunar-calendar (1000-01
 ```
 
 ## Documentation
-[https://blog.slarea.com/KoreanLunarSolarConverter/documentation/koreanlunarsolarconverter](https://blog.slarea.com/KoreanLunarSolarConverter/documentation/koreanlunarsolarconverter/)
+[https://docs.gorani.me/KoreanLunarSolarConverter/documentation/koreanlunarsolarconverter](https://docs.gorani.me/KoreanLunarSolarConverter/documentation/koreanlunarsolarconverter/)
 
 ## Feature
 - [ ] KoreanLunarStringFormatter.lunarDateString(fromLunar:)
