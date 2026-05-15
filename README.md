@@ -4,16 +4,13 @@
 한국 양음력 변환 - Swift
 
 ![Badge](https://img.shields.io/badge/swift-white.svg?style=flat-square&logo=Swift)
-![Badge - Version](https://img.shields.io/badge/Version-0.9.0-1177AA?style=flat-square)
+![Badge - Version](https://img.shields.io/badge/Version-0.9.1-1177AA?style=flat-square)
 ![Badge - Swift Package Manager](https://img.shields.io/badge/SPM-compatible-orange?style=flat-square)
 ![Badge - License](https://img.shields.io/badge/license-MIT-black?style=flat-square)
 ![Badge - Platform](https://img.shields.io/badge/macOS-v12.0-yellow?style=flat-square)
 ![Badge - Platform](https://img.shields.io/badge/iOS-v12.0-yellow?style=flat-square)
 ![Badge - Platform](https://img.shields.io/badge/tvOS-v12.0-yellow?style=flat-square)
 ![Badge - Platform](https://img.shields.io/badge/watchOS-v4.0-yellow?style=flat-square)
-
-changed start year to support conversion from 1950
-
 
 #### Overview
 
@@ -30,7 +27,7 @@ Korean lunar-calendar (2016-01-01 ~ 2036-12-31)
 ```
 
 ## Documentation
-[https://swift-man.github.io/KoreanLunarSolarConverter/documentation/koreanlunarsolarconverter](https://blog.slarea.com/KoreanLunarSolarConverter/documentation/koreanlunarsolarconverter/)
+[https://docs.gorani.me/KoreanLunarSolarConverter/documentation/koreanlunarsolarconverter](https://docs.gorani.me/KoreanLunarSolarConverter/documentation/koreanlunarsolarconverter/)
 
 ## Feature
 - [ ] KoreanLunarStringFormatter.lunarDateString(fromLunar:)

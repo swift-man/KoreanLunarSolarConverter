@@ -1,0 +1,40 @@
+name: Deploy DocC
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-docc-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-docs:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build DocC
+        run: |
+          ./GeneratingDocumentationSite
+          touch ./docs/.nojekyll
+
+      - name: Deploy to swift-man/docs
+        if: github.event_name != 'pull_request'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          deploy_key: ${{ secrets.DOCS_DEPLOY_KEY }}
+          external_repository: swift-man/docs
+          publish_branch: main
+          publish_dir: ./docs
+          destination_dir: KoreanLunarSolarConverter
+          full_commit_message: Deploy KoreanLunarSolarConverter DocC from ${{ github.repository }}@${{ github.sha }}
