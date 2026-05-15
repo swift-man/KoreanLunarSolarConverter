@@ -8,8 +8,8 @@ KoreanLunarSolarConverter provides offline date conversion based on Korean lunar
 
 The supported range is:
 
-- Gregorian calendar: 1000-02-13 through 2050-12-31
-- Korean lunar calendar: 1000-01-01 through 2050-11-18
+- Gregorian calendar: 2016-01-01 through 2036-12-31
+- Korean lunar calendar: 2015-11-30 through 2036-11-29
 
 ## Convert Lunar Dates to Gregorian Dates
 
@@ -17,8 +17,8 @@ The supported range is:
 import KoreanLunarSolarConverter
 
 let lunarDate = Date()
-let converter = KoreanLunarToSolarConverter()
-let solarDate = try converter.solarDate(fromLunar: lunarDate)
+let converter = try KoreanLunarToSolarConverter()
+let solarDates = try converter.solarDate(fromLunar: lunarDate)
 ```
 
 ## Convert Gregorian Dates to Lunar Dates
@@ -27,7 +27,7 @@ let solarDate = try converter.solarDate(fromLunar: lunarDate)
 import KoreanLunarSolarConverter
 
 let solarDate = Date()
-let converter = KoreanSolarToLunarConverter()
+let converter = try KoreanSolarToLunarConverter()
 let lunarDate = try converter.lunarDate(fromSolar: solarDate)
 ```
 
@@ -47,12 +47,7 @@ let lunarZodiac = try formatter.lunarZodiac(fromSolar: Date())
 
 - ``KoreanLunarToSolarConverter``
 - ``KoreanSolarToLunarConverter``
-- ``KoreanDate``
-
-### Date Range Validation
-
-- ``KoreanLunarDateRangeChecker``
-- ``KoreanSolarDateRangeChecker``
+- ``LunarDate``
 
 ### Formatting
 
