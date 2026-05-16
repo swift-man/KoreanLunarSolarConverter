@@ -48,6 +48,9 @@ playground.xcworkspace
 
 .build/
 
+# Editor swap files
+*.swp
+
 # DocC generated output
 docs/
 *.doccarchive/
